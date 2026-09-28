@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Product | AELORIA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --vanilla: #FFF8E2;
+      --white: #FFFFFF;
+      --brown: #5E442E;
+      --pomegranate: #C85555;
+      --bistre: #767B39;
+      --blue: #DDEEF5;
+      --melon: #F7BCB0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--vanilla);
+      color: var(--brown);
+      font-family: "Playfair Display", serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--white);
+      text-align: center;
+      padding: 24px 20px 14px;
+      border-bottom: 1px solid rgba(94, 68, 46, 0.12);
+    }
+
+    .logo {
+      font-family: "Amatic SC", sans-serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--brown);
+      text-decoration: none;
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      color: var(--bistre);
+      margin-top: -8px;
+    }
+
+    nav {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--pomegranate);
+    }
+
+    .product-page {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: var(--bistre);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+      color: var(--pomegranate);
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .product-image {
+      min-height: 480px;
+      background: var(--blue);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 10px 30px rgba(94, 68, 46, 0.08);
+    }
+
+    .category {
+      color: var(--bistre);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: 3.5rem;
+      font-weight: 400;
+      color: var(--pomegranate);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+    }
+
+    .details {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 18px;
+      margin: 20px 0;
+    }
+
+    .details p {
+      font-size: 0.88rem;
+      margin: 5px 0;
+    }
+
+    .stock {
+      color: var(--bistre);
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+
+    .note-label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 0.9rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      border: 1px solid rgba(94, 68, 46, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      font-family: "Playfair Display", serif;
+      background: var(--white);
+      color: var(--brown);
+      outline: none;
+    }
+
+    .add-button {
+      width: 100%;
+      border: none;
+      background: var(--pomegranate);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: 0.2s ease;
+    }
+
+    .add-button:hover {
+      background: var(--bistre);
+      transform: translateY(-2px);
+    }
+
+    .message {
+      display: none;
+      background: var(--blue);
+      border-radius: 12px;
+      padding: 13px;
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 1px solid rgba(94, 68, 46, 0.1);
+    }
+
+    .footer-logo {
+      font-family: "Amatic SC", sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 700px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .product-image {
+        min-height: 350px;
+      }
+
+      h1 {
+        font-size: 2.9rem;
+      }
+
+      .logo {
+        font-size: 3.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <a href="index.html" class="logo">AELORIA</a>
+
+    <div class="tagline">
+      its blessing to be Me
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+
+  </header>
+
+
+  <main class="product-page">
+
+    <a href="shop.html" class="back-link">
+      ← Back to Shop
+    </a>
+
+    <section class="product-layout">
+
+      <div class="product-image" id="productImage">
+        🌷
+      </div>
+
+
+      <div class="product-info">
+
+        <div class="category" id="productCategory">
+          Crochet Characters
+        </div>
+
+        <h1 id="productName">
+          Cat Petal Crochet Charm
+        </h1>
+
+        <div class="price" id="productPrice">
+          ₹179
+        </div>
+
+        <p class="description" id="productDescription">
+          A Black cat with a flower tucked over one ear.
+          Mini Plushie Charm with Keyring.
+        </p>
+
+
+        <div class="details">
+
+          <p>
+            <strong>Size:</strong> 5 cm
+          </p>
+
+          <p>
+            <strong>Made:</strong> Made to Order
+          </p>
+
+          <p>
+            <strong>Shipping:</strong> ₹75 within India
+          </p>
+
+          <p>
+            <strong>Dispatch:</strong> 7–14 business days
+          </p>
+
+        </div>
+
+
+        <div class="stock" id="productStock">
+          10 available
+        </div>
+
+
+        <label class="note-label" for="customerNote">
+          Want to leave a note with your order? 🌷
+        </label>
+
+        <textarea
+          id="customerNote"
+          placeholder="Write your note here..."
+        ></textarea>
+
+
+        <button
+          class="add-button"
+          onclick="addToCart()"
+        >
+          Add to Cart
+        </button>
+
+
+        <div class="message" id="message">
+          Added to your little AELORIA basket! 🌷
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="footer-logo">
+      AELORIA
+    </div>
+
+    <p>
+      its blessing to be Me
+    </p>
+
+    <p>
+      Handmade with love in Pune, India 🌷
+    </p>
+
+  </footer>
+
+
+  <script>
+
+    function addToCart() {
+
+      const note =
+        document.getElementById("customerNote").value;
+
+      const product = {
+        name: document.getElementById("productName").textContent.trim(),
+        price: document.getElementById("productPrice").textContent.trim(),
+        note: note
+      };
+
+      localStorage.setItem(
+        "aeloriaLastProduct",
+        JSON.stringify(product)
+      );
+
+      document.getElementById("message").style.display = "block";
+    }
+
+  </script>
+
+</body>
+</html>
