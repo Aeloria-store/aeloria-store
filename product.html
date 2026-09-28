@@ -4,70 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Product | AELORIA</title>
+  <title>AELORIA | Product</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --vanilla: #FFF8E2;
-      --white: #FFFFFF;
+      --butter: #FFEFB9;
       --brown: #5E442E;
       --pomegranate: #C85555;
       --bistre: #767B39;
-      --blue: #DDEEF5;
       --melon: #F7BCB0;
+      --sky: #DDEEF5;
+      --white: #FFFFFF;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       background: var(--vanilla);
       color: var(--brown);
       font-family: "Playfair Display", serif;
-      line-height: 1.6;
     }
 
-    header {
-      background: var(--white);
-      text-align: center;
-      padding: 24px 20px 14px;
-      border-bottom: 1px solid rgba(94, 68, 46, 0.12);
-    }
-
-    .logo {
-      font-family: "Amatic SC", sans-serif;
-      font-size: 3.8rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--brown);
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
+    header {
+      text-align: center;
+      padding: 28px 20px 18px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(94, 68, 46, 0.08);
+    }
+
+    .logo {
+      font-family: "Amatic SC", cursive;
+      font-size: 58px;
+      line-height: 1;
+      letter-spacing: 3px;
+      color: var(--brown);
+    }
+
     .tagline {
-      font-size: 0.85rem;
-      color: var(--bistre);
-      margin-top: -8px;
+      margin-top: 6px;
+      font-size: 13px;
+      font-style: italic;
     }
 
     nav {
       margin-top: 18px;
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
-    }
-
-    nav a {
-      color: var(--brown);
-      text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 14px;
     }
 
     nav a:hover {
@@ -77,168 +76,148 @@
     .product-page {
       max-width: 1050px;
       margin: 0 auto;
-      padding: 60px 20px 80px;
+      padding: 55px 20px 80px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 25px;
-      color: var(--bistre);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .back-link:hover {
+      margin-bottom: 28px;
+      font-size: 14px;
       color: var(--pomegranate);
     }
 
     .product-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: start;
+      gap: 55px;
+      align-items: center;
     }
 
     .product-image {
-      min-height: 480px;
-      background: var(--blue);
-      border-radius: 22px;
+      min-height: 470px;
+      border-radius: 28px;
+      background: var(--sky);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 7rem;
-      box-shadow: 0 10px 30px rgba(94, 68, 46, 0.08);
+      font-size: 120px;
+      box-shadow: 0 12px 30px rgba(94, 68, 46, 0.10);
     }
 
     .category {
       color: var(--bistre);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.78rem;
+      font-size: 14px;
       margin-bottom: 8px;
     }
 
     h1 {
       font-family: "Great Vibes", cursive;
-      font-size: 3.5rem;
+      font-size: 56px;
+      line-height: 1.05;
       font-weight: 400;
-      color: var(--pomegranate);
-      line-height: 1.1;
-      margin-bottom: 12px;
+      margin: 0 0 12px;
     }
 
     .price {
-      font-size: 1.3rem;
+      font-size: 25px;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .description {
-      font-size: 0.98rem;
-      margin-bottom: 18px;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 25px;
     }
 
     .details {
       background: var(--white);
-      border-radius: 15px;
-      padding: 18px;
-      margin: 20px 0;
-    }
-
-    .details p {
-      font-size: 0.88rem;
-      margin: 5px 0;
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      line-height: 1.9;
+      font-size: 14px;
     }
 
     .stock {
-      color: var(--bistre);
-      font-size: 0.85rem;
-      margin-bottom: 18px;
+      margin: 15px 0;
+      font-weight: 600;
     }
 
     .note-label {
       display: block;
-      margin-bottom: 7px;
-      font-size: 0.9rem;
+      margin-bottom: 8px;
+      font-size: 14px;
     }
 
     textarea {
       width: 100%;
-      min-height: 90px;
-      resize: vertical;
-      border: 1px solid rgba(94, 68, 46, 0.2);
-      border-radius: 12px;
+      min-height: 95px;
       padding: 12px;
+      border: 1px solid rgba(94, 68, 46, 0.20);
+      border-radius: 14px;
+      resize: vertical;
       font-family: "Playfair Display", serif;
       background: var(--white);
       color: var(--brown);
-      outline: none;
     }
 
-    .add-button {
+    .cart-button {
       width: 100%;
+      margin-top: 18px;
+      padding: 15px 22px;
       border: none;
+      border-radius: 14px;
       background: var(--pomegranate);
       color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
       font-family: "Playfair Display", serif;
-      font-size: 1rem;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 18px;
       transition: 0.2s ease;
     }
 
-    .add-button:hover {
-      background: var(--bistre);
+    .cart-button:hover {
       transform: translateY(-2px);
     }
 
     .message {
-      display: none;
-      background: var(--blue);
-      border-radius: 12px;
-      padding: 13px;
-      margin-top: 15px;
+      margin-top: 14px;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 14px;
+      color: var(--bistre);
+      min-height: 20px;
     }
 
     footer {
       background: var(--white);
       text-align: center;
-      padding: 35px 20px;
-      border-top: 1px solid rgba(94, 68, 46, 0.1);
+      padding: 45px 20px;
+      border-top: 1px solid rgba(94, 68, 46, 0.08);
     }
 
     .footer-logo {
-      font-family: "Amatic SC", sans-serif;
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-family: "Amatic SC", cursive;
+      font-size: 45px;
       letter-spacing: 2px;
     }
 
-    footer p {
-      font-size: 0.8rem;
-      margin-top: 5px;
-    }
-
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .product-layout {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 35px;
       }
 
       .product-image {
-        min-height: 350px;
+        min-height: 340px;
+        font-size: 90px;
       }
 
       h1 {
-        font-size: 2.9rem;
+        font-size: 46px;
       }
 
-      .logo {
-        font-size: 3.2rem;
+      nav {
+        gap: 13px;
       }
     }
   </style>
@@ -246,151 +225,185 @@
 
 <body>
 
-  <header>
+<header>
+  <a href="index.html">
+    <div class="logo">AELORIA</div>
+  </a>
 
-    <a href="index.html" class="logo">AELORIA</a>
+  <div class="tagline">its blessing to be Me</div>
 
-    <div class="tagline">
-      its blessing to be Me
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+
+<main class="product-page">
+
+  <a href="shop.html" class="back-link">← Back to Shop</a>
+
+  <div class="product-layout">
+
+    <div class="product-image" id="productImage">
+      🌷
     </div>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
+    <div>
 
-  </header>
-
-
-  <main class="product-page">
-
-    <a href="shop.html" class="back-link">
-      ← Back to Shop
-    </a>
-
-    <section class="product-layout">
-
-      <div class="product-image" id="productImage">
-        🌷
+      <div class="category" id="productCategory">
+        Crochet Characters
       </div>
 
+      <h1 id="productName">
+        Cat Petal Crochet Charm
+      </h1>
 
-      <div class="product-info">
-
-        <div class="category" id="productCategory">
-          Crochet Characters
-        </div>
-
-        <h1 id="productName">
-          Cat Petal Crochet Charm
-        </h1>
-
-        <div class="price" id="productPrice">
-          ₹179
-        </div>
-
-        <p class="description" id="productDescription">
-          A Black cat with a flower tucked over one ear.
-          Mini Plushie Charm with Keyring.
-        </p>
-
-
-        <div class="details">
-
-          <p>
-            <strong>Size:</strong> 5 cm
-          </p>
-
-          <p>
-            <strong>Made:</strong> Made to Order
-          </p>
-
-          <p>
-            <strong>Shipping:</strong> ₹75 within India
-          </p>
-
-          <p>
-            <strong>Dispatch:</strong> 7–14 business days
-          </p>
-
-        </div>
-
-
-        <div class="stock" id="productStock">
-          10 available
-        </div>
-
-
-        <label class="note-label" for="customerNote">
-          Want to leave a note with your order? 🌷
-        </label>
-
-        <textarea
-          id="customerNote"
-          placeholder="Write your note here..."
-        ></textarea>
-
-
-        <button
-          class="add-button"
-          onclick="addToCart()"
-        >
-          Add to Cart
-        </button>
-
-
-        <div class="message" id="message">
-          Added to your little AELORIA basket! 🌷
-        </div>
-
+      <div class="price" id="productPrice">
+        ₹179
       </div>
 
-    </section>
+      <div class="description" id="productDescription">
+        A Black cat with a flower tucked over one ear.
+        Mini Plushie Charm with Keyring.
+      </div>
 
-  </main>
+      <div class="details">
+        <div><strong>Size:</strong> <span id="productSize">5 cm</span></div>
+        <div><strong>Making:</strong> Made to Order</div>
+        <div><strong>Shipping:</strong> ₹75 within India</div>
+        <div><strong>Dispatch:</strong> 7–14 business days</div>
+      </div>
 
+      <div class="stock" id="productStock">
+        10 available
+      </div>
 
-  <footer>
+      <label class="note-label" for="customerNote">
+        Customer note (optional)
+      </label>
 
-    <div class="footer-logo">
-      AELORIA
+      <textarea
+        id="customerNote"
+        placeholder="Anything you'd like us to know about your order?"
+      ></textarea>
+
+      <button class="cart-button" onclick="addToCart()">
+        Add to Cart ♡
+      </button>
+
+      <div class="message" id="message"></div>
+
     </div>
 
-    <p>
-      its blessing to be Me
-    </p>
+  </div>
 
-    <p>
-      Handmade with love in Pune, India 🌷
-    </p>
-
-  </footer>
+</main>
 
 
-  <script>
+<footer>
+  <div class="footer-logo">AELORIA</div>
+  <p>Hand made & hand painted with love 🌷</p>
+</footer>
 
-    function addToCart() {
 
-      const note =
-        document.getElementById("customerNote").value;
+<script>
 
-      const product = {
-        name: document.getElementById("productName").textContent.trim(),
-        price: document.getElementById("productPrice").textContent.trim(),
-        note: note
-      };
+  const products = {
 
-      localStorage.setItem(
-        "aeloriaLastProduct",
-        JSON.stringify(product)
-      );
+    "cat-petal": {
+      name: "Cat Petal Crochet Charm",
+      price: 179,
+      category: "Crochet Characters",
+      image: "🐈‍⬛🌷",
+      description:
+        "A Black cat with a flower tucked over one ear. Mini Plushie Charm with Keyring.",
+      size: "5 cm",
+      stock: 10
+    },
 
-      document.getElementById("message").style.display = "block";
+    "wizard-cat": {
+      name: "Wizard Cat Crochet Charm",
+      price: 199,
+      category: "Crochet Characters",
+      image: "🐈‍⬛🪄",
+      description:
+        "A grey cat with wand, hat & cape. Mini plushie Charm with Keyring.",
+      size: "5 cm",
+      stock: 10
+    },
+
+    "rosie-bunny": {
+      name: "Rosie Bunny",
+      price: 199,
+      category: "Crochet Characters",
+      image: "🐰🌸",
+      description:
+        "A white bunny with pink hat & dress. Mini plushie Charm with Keyring.",
+      size: "5 cm",
+      stock: 10
     }
 
-  </script>
+  };
+
+
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("product") || "cat-petal";
+
+  const product = products[productId];
+
+
+  if (product) {
+
+    document.getElementById("productImage").textContent = product.image;
+
+    document.getElementById("productCategory").textContent =
+      product.category;
+
+    document.getElementById("productName").textContent =
+      product.name;
+
+    document.getElementById("productPrice").textContent =
+      "₹" + product.price;
+
+    document.getElementById("productDescription").textContent =
+      product.description;
+
+    document.getElementById("productSize").textContent =
+      product.size;
+
+    document.getElementById("productStock").textContent =
+      product.stock + " available";
+
+  }
+
+
+  function addToCart() {
+
+    const note = document.getElementById("customerNote").value;
+
+    const cartItem = {
+      id: productId,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      note: note,
+      quantity: 1
+    };
+
+    localStorage.setItem(
+      "aeloriaLastProduct",
+      JSON.stringify(cartItem)
+    );
+
+    document.getElementById("message").textContent =
+      "Added to your AELORIA cart ♡";
+
+  }
+
+</script>
 
 </body>
 </html>
