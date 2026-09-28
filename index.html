@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AELORIA — its blessing to be Me</title>
+
+    <meta name="description" content="AELORIA — Handmade and hand-painted crochet character charms and clay frame charms for your keychains and bags.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #fff8e2;
+            color: #5e442e;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fffdf5;
+            padding: 22px 18px;
+            text-align: center;
+            border-bottom: 1px solid #f0dfbd;
+        }
+
+        .moon {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .logo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 42px;
+            letter-spacing: 5px;
+            color: #5e442e;
+        }
+
+        .tagline {
+            font-size: 14px;
+            font-style: italic;
+            color: #767b39;
+            margin-top: 2px;
+        }
+
+        nav {
+            margin-top: 18px;
+        }
+
+        nav a {
+            display: inline-block;
+            margin: 5px 8px;
+            color: #5e442e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #c85555;
+        }
+
+        .hero {
+            min-height: 430px;
+            padding: 70px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background:
+                linear-gradient(
+                    rgba(255, 248, 226, 0.72),
+                    rgba(255, 248, 226, 0.72)
+                ),
+                url("https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1600&q=80")
+                center/cover;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 10vw, 76px);
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 18px;
+            background: #c85555;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 55px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 720px;
+        }
+
+        .intro h2,
+        .products h2,
+        .about h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            font-size: 16px;
+        }
+
+        .flower {
+            color: #767b39;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: #fffdf5;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(94, 68, 46, 0.08);
+        }
+
+        .product-image {
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7bcb0;
+            color: #5e442e;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product-card:nth-child(2) .product-image {
+            background: #dfe4bd;
+        }
+
+        .product-card:nth-child(3) .product-image {
+            background: #c9e1ec;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            color: #c85555;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .about {
+            text-align: center;
+            background: #ffefb9;
+            border-radius: 28px;
+            margin: 20px auto;
+            max-width: 1050px;
+        }
+
+        .about-text {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        footer {
+            background: #5e442e;
+            color: #fff8e2;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #fff8e2;
+        }
+
+        @media (max-width: 750px) {
+            .logo {
+                font-size: 34px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 390px;
+                padding: 50px 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 270px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="moon">☾</div>
+
+        <div class="logo">AELORIA</div>
+
+        <div class="tagline">its blessing to be Me</div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+
+                <div class="flower">🌷 ✦ 🌿</div>
+
+                <h1>Welcome to AELORIA</h1>
+
+                <p>
+                    Handmade little pieces of art,
+                    created with love from my artist's desk
+                    in Pune, India.
+                </p>
+
+                <a href="#shop" class="button">
+                    Explore the little shop
+                </a>
+
+            </div>
+        </section>
+
+        <section class="intro">
+
+            <div class="flower">🌿 ✿ 🌿</div>
+
+            <h2>Handmade & Hand-painted</h2>
+
+            <p>
+                Crochet Character Charms & Clay Frame Charms
+                for your Keychains & Bags.
+            </p>
+
+            <div class="flower">🌷</div>
+
+        </section>
+
+        <section class="products" id="shop">
+
+            <h2>Little AELORIA Things ♡</h2>
+
+            <div class="product-grid">
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        🐈‍⬛🌷<br>
+                        Temporary Product Image
+                    </div>
+
+                    <div class="product-info">
+                        <h3>Cat Petal Crochet Charm</h3>
+                        <p class="price">₹179</p>
+                        <p>
+                            A black cat with a flower tucked
+                            over one ear. Mini plushie charm
+                            with keyring.
+                        </p>
+                    </div>
+
+                </article>
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        🐈‍⬛🪄<br>
+                        Temporary Product Image
+                    </div>
+
+                    <div class="product-info">
+                        <h3>Wizard Cat Crochet Charm</h3>
+                        <p class="price">₹199</p>
+                        <p>
+                            A grey cat with wand, hat & cape.
+                            Mini plushie charm with keyring.
+                        </p>
+                    </div>
+
+                </article>
+
+                <article class="product-card">
+
+                    <div class="product-image">
+                        🐰🌸<br>
+                        Temporary Product Image
+                    </div>
+
+                    <div class="product-info">
+                        <h3>Rosie Bunny</h3>
+                        <p class="price">₹199</p>
+                        <p>
+                            A white bunny with pink hat & dress.
+                            Mini plushie charm with keyring.
+                        </p>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="about" id="about">
+
+            <div class="about-text">
+
+                <div class="flower">🌷</div>
+
+                <h2>A little about AELORIA</h2>
+
+                <p>
+                    Hi! I'm Anushree Jadhav, 19 yrs old Artist &
+                    Owner of AELORIA based in Pune, India.
+                </p>
+
+                <br>
+
+                <p>
+                    Being an artist I always knew i wanted to
+                    start something of my own around art.
+                    And at age of 19 I finally decided to start -
+                    and thats how Aeloria was Born.
+                </p>
+
+                <br>
+
+                <p>
+                    Its just Me & my desk doing all the bits
+                    of Aeloria. I hope you enjoy my products
+                    as much as i do creating them for you!
+                </p>
+
+                <br>
+
+                <p>
+                    Happy Art Shopping🌷
+                </p>
+
+                <p>
+                    Love<br>
+                    Anushree
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer id="contact">
+
+        <h2>AELORIA 🌙</h2>
+
+        <p>its blessing to be Me</p>
+
+        <br>
+
+        <p>
+            📧
+            <a href="mailto:aeloriashop@gmail.com">
+                aeloriashop@gmail.com
+            </a>
+        </p>
+
+        <p>
+            Instagram:
+            <a href="https://instagram.com/aeloria_studio">
+                @aeloria_studio
+            </a>
+        </p>
+
+        <p>
+            YouTube:
+            <a href="https://youtube.com/@Anushree_jadhav">
+                @Anushree_jadhav
+            </a>
+        </p>
+
+        <br>
+
+        <p>Contact hours: 10am – 6pm</p>
+
+        <br>
+
+        <p>© AELORIA — Handmade with love 🌷</p>
+
+    </footer>
+
+</body>
+</html>
