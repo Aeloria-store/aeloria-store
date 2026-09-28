@@ -4,128 +4,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shop | AELORIA</title>
+  <title>AELORIA | Shop</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --vanilla: #FFF8E2;
-      --white: #FFFFFF;
+      --butter: #FFEFB9;
       --brown: #5E442E;
       --pomegranate: #C85555;
       --bistre: #767B39;
-      --blue: #DDEEF5;
+      --melon: #F7BCB0;
+      --sky: #DDEEF5;
+      --white: #FFFFFF;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       background: var(--vanilla);
       color: var(--brown);
       font-family: "Playfair Display", serif;
-      line-height: 1.6;
     }
 
-    header {
-      background: var(--white);
-      text-align: center;
-      padding: 24px 20px 14px;
-      border-bottom: 1px solid rgba(94, 68, 46, 0.12);
-    }
-
-    .logo {
-      font-family: "Amatic SC", sans-serif;
-      font-size: 3.8rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--brown);
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
+    header {
+      text-align: center;
+      padding: 28px 20px 18px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(94, 68, 46, 0.08);
+    }
+
+    .logo {
+      font-family: "Amatic SC", cursive;
+      font-size: 58px;
+      line-height: 1;
+      letter-spacing: 3px;
+    }
+
     .tagline {
-      font-size: 0.85rem;
-      margin-top: -8px;
-      color: var(--bistre);
+      margin-top: 6px;
+      font-size: 13px;
+      font-style: italic;
     }
 
     nav {
       margin-top: 18px;
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
-    }
-
-    nav a {
-      color: var(--brown);
-      text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 14px;
     }
 
     nav a:hover {
       color: var(--pomegranate);
     }
 
-    .shop-header {
-      text-align: center;
-      padding: 55px 20px 30px;
-    }
-
-    .shop-header h1 {
-      font-family: "Great Vibes", cursive;
-      font-size: 3.2rem;
-      font-weight: 400;
-      color: var(--pomegranate);
-      margin-bottom: 8px;
-    }
-
-    .shop-header p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 0.95rem;
-    }
-
-    .shop-controls {
+    .shop {
       max-width: 1100px;
-      margin: 0 auto 30px;
-      padding: 0 20px;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+      margin: auto;
+      padding: 55px 20px 80px;
     }
 
-    .shop-controls input,
-    .shop-controls select {
-      font-family: "Playfair Display", serif;
-      border: 1px solid rgba(94, 68, 46, 0.2);
+    .shop-title {
+      text-align: center;
+      font-family: "Great Vibes", cursive;
+      font-size: 58px;
+      font-weight: 400;
+      margin: 0 0 10px;
+    }
+
+    .shop-intro {
+      text-align: center;
+      margin: 0 auto 35px;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .filters input,
+    .filters select {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid rgba(94, 68, 46, 0.18);
+      border-radius: 12px;
       background: var(--white);
       color: var(--brown);
-      border-radius: 12px;
-      padding: 12px 15px;
-      outline: none;
-      font-size: 0.9rem;
+      font-family: "Playfair Display", serif;
+      font-size: 14px;
     }
 
-    .shop-controls input {
-      width: min(100%, 300px);
-    }
-
-    .shop-controls select {
-      min-width: 180px;
-    }
-
-    .products {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 20px 70px;
+    .product-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
@@ -133,30 +120,435 @@
 
     .product-card {
       background: var(--white);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(94, 68, 46, 0.08);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(94, 68, 46, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(94, 68, 46, 0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(94, 68, 46, 0.12);
+    }
+
+    .product-link {
+      display: block;
     }
 
     .product-image {
-      height: 270px;
-      background: var(--blue);
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 17px;
+      background: var(--sky);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
-    }
-
-    .product-info {
-      padding: 20px;
+      font-size: 80px;
+      margin-bottom: 16px;
     }
 
     .product-category {
-      font-size: 0.75rem;
-      color: var(--
+      color: var(--bistre);
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .product-name {
+      font-family: "Great Vibes", cursive;
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 5px;
+    }
+
+    .product-price {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .shop-button {
+      display: block;
+      text-align: center;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--pomegranate);
+      color: var(--white);
+      font-size: 14px;
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      padding: 40px 10px;
+    }
+
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 45px 20px;
+      border-top: 1px solid rgba(94, 68, 46, 0.08);
+    }
+
+    .footer-logo {
+      font-family: "Amatic SC", cursive;
+      font-size: 45px;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 760px) {
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .product-name {
+        font-size: 25px;
+      }
+
+      .product-image {
+        font-size: 60px;
+      }
+
+      nav {
+        gap: 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-title {
+        font-size: 48px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="index.html">
+    <div class="logo">AELORIA</div>
+  </a>
+
+  <div class="tagline">
+    its blessing to be Me
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+</header>
+
+
+<main class="shop">
+
+  <h1 class="shop-title">
+    Shop AELORIA
+  </h1>
+
+  <p class="shop-intro">
+    Handmade little characters and whimsical clay charms,
+    created with love at my artist's desk. 🌷
+  </p>
+
+
+  <div class="filters">
+
+    <input
+      type="search"
+      id="search"
+      placeholder="Search products..."
+      oninput="filterProducts()"
+    >
+
+    <select id="category" onchange="filterProducts()">
+
+      <option value="all">
+        All Categories
+      </option>
+
+      <option value="Crochet Characters">
+        Crochet Characters
+      </option>
+
+      <option value="Clay Whimsy Frames">
+        Clay Whimsy Frames
+      </option>
+
+      <option value="Clay Vintage Frames">
+        Clay Vintage Frames
+      </option>
+
+      <option value="Combo Offers">
+        Combo Offers
+      </option>
+
+    </select>
+
+
+    <select id="availability" onchange="filterProducts()">
+
+      <option value="all">
+        All Products
+      </option>
+
+      <option value="available">
+        Available
+      </option>
+
+      <option value="unavailable">
+        Sold Out
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="product-grid" id="productGrid">
+
+
+    <!-- CAT PETAL -->
+
+    <div
+      class="product-card"
+      data-name="Cat Petal Crochet Charm"
+      data-category="Crochet Characters"
+      data-stock="10"
+    >
+
+      <a
+        class="product-link"
+        href="product.html?product=cat-petal"
+      >
+
+        <div class="product-image">
+          🐈‍⬛🌷
+        </div>
+
+        <div class="product-category">
+          Crochet Characters
+        </div>
+
+        <div class="product-name">
+          Cat Petal Crochet Charm
+        </div>
+
+        <div class="product-price">
+          ₹179
+        </div>
+
+      </a>
+
+      <a
+        class="shop-button"
+        href="product.html?product=cat-petal"
+      >
+        View Product ♡
+      </a>
+
+    </div>
+
+
+    <!-- WIZARD CAT -->
+
+    <div
+      class="product-card"
+      data-name="Wizard Cat Crochet Charm"
+      data-category="Crochet Characters"
+      data-stock="10"
+    >
+
+      <a
+        class="product-link"
+        href="product.html?product=wizard-cat"
+      >
+
+        <div class="product-image">
+          🐈‍⬛🪄
+        </div>
+
+        <div class="product-category">
+          Crochet Characters
+        </div>
+
+        <div class="product-name">
+          Wizard Cat Crochet Charm
+        </div>
+
+        <div class="product-price">
+          ₹199
+        </div>
+
+      </a>
+
+      <a
+        class="shop-button"
+        href="product.html?product=wizard-cat"
+      >
+        View Product ♡
+      </a>
+
+    </div>
+
+
+    <!-- ROSIE BUNNY -->
+
+    <div
+      class="product-card"
+      data-name="Rosie Bunny"
+      data-category="Crochet Characters"
+      data-stock="10"
+    >
+
+      <a
+        class="product-link"
+        href="product.html?product=rosie-bunny"
+      >
+
+        <div class="product-image">
+          🐰🌸
+        </div>
+
+        <div class="product-category">
+          Crochet Characters
+        </div>
+
+        <div class="product-name">
+          Rosie Bunny
+        </div>
+
+        <div class="product-price">
+          ₹199
+        </div>
+
+      </a>
+
+      <a
+        class="shop-button"
+        href="product.html?product=rosie-bunny"
+      >
+        View Product ♡
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="empty" id="empty">
+    No little AELORIA treasures found. 🌷
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-logo">
+    AELORIA
+  </div>
+
+  <p>
+    Hand made & hand painted with love 🌷
+  </p>
+
+</footer>
+
+
+<script>
+
+function filterProducts() {
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
+  const availability =
+    document
+      .getElementById("availability")
+      .value;
+
+
+  const cards =
+    document.querySelectorAll(".product-card");
+
+
+  let visibleCount = 0;
+
+
+  cards.forEach(function(card) {
+
+    const name =
+      card.dataset.name.toLowerCase();
+
+    const cardCategory =
+      card.dataset.category;
+
+    const stock =
+      Number(card.dataset.stock);
+
+
+    const matchesSearch =
+      name.includes(search);
+
+    const matchesCategory =
+      category === "all" ||
+      cardCategory === category;
+
+    const matchesAvailability =
+      availability === "all" ||
+      (availability === "available" && stock > 0) ||
+      (availability === "unavailable" && stock <= 0);
+
+
+    if (
+      matchesSearch &&
+      matchesCategory &&
+      matchesAvailability
+    ) {
+
+      card.style.display = "";
+
+      visibleCount++;
+
+    } else {
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+
+  document.getElementById("empty").style.display =
+    visibleCount === 0 ? "block" : "none";
+
+}
+
+</script>
+
+</body>
+</html>
