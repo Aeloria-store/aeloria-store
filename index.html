@@ -4,31 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>AELORIA — Handmade & Hand Painted Charms</title>
+  <title>AELORIA | Handmade Whimsies</title>
 
-  <meta
-    name="description"
-    content="AELORIA — Handmade & hand painted crochet character charms and clay frame charms for your keychains and bags."
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap');
-
-    :root {
-      --vanilla: #FFF8E2;
-      --butter: #FFEFB9;
-      --brown: #5E442E;
-      --pomegranate: #C85555;
-      --bistre: #767B39;
-      --melon: #F7BCB0;
-      --sky: #CFE8F5;
-      --white: #FFFFFF;
-    }
-
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -36,10 +21,10 @@
     }
 
     body {
-      background: var(--white);
-      color: var(--brown);
-      font-family: 'Playfair Display', serif;
-      line-height: 1.6;
+      margin: 0;
+      background: #FFF8E2;
+      color: #5E442E;
+      font-family: "Playfair Display", serif;
     }
 
     a {
@@ -47,248 +32,140 @@
       text-decoration: none;
     }
 
-    /* TOP BAR */
-
     header {
-      background: rgba(255, 255, 255, 0.94);
-      border-bottom: 1px solid rgba(94, 68, 46, 0.12);
+      background: white;
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #f1dfb8;
     }
 
-    .header-inner {
-      max-width: 1200px;
+    .nav-wrap {
+      max-width: 1150px;
       margin: auto;
-      padding: 16px 20px;
-      text-align: center;
-      position: relative;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .logo {
-      font-family: 'Amatic SC', san serif;
-      font-size: 3rem;
-      color: var(--brown);
-      line-height: 1;
-    }
-
-    .tagline {
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      margin-top: 4px;
-      color: var(--bistre);
+      font-family: "Shadows Into Light Two", cursive;
+      font-size: 35px;
+      color: #5E442E;
+      white-space: nowrap;
     }
 
     nav {
       display: flex;
-      justify-content: center;
-      gap: 22px;
-      margin-top: 14px;
+      gap: 20px;
+      align-items: center;
       flex-wrap: wrap;
-      font-size: 0.9rem;
+      justify-content: center;
     }
 
     nav a {
-      transition: 0.25s ease;
+      font-size: 14px;
+      transition: 0.2s ease;
     }
 
     nav a:hover {
-      color: var(--pomegranate);
-      transform: translateY(-2px);
+      color: #C85555;
     }
 
-    /* HERO */
-
     .hero {
-      min-height: 520px;
+      max-width: 1150px;
+      margin: 25px auto;
+      padding: 0 18px;
+    }
+
+    .hero-box {
+      min-height: 390px;
+      border-radius: 30px;
+      background:
+        linear-gradient(
+          rgba(255,248,226,0.72),
+          rgba(255,248,226,0.72)
+        ),
+        linear-gradient(135deg, #F7BCB0, #FFEFB9, #cfe3e8);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 60px 20px;
-      background:
-        linear-gradient(
-          rgba(255, 248, 226, 0.58),
-          rgba(255, 248, 226, 0.72)
-        ),
-        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=80")
-        center/cover;
+      padding: 45px 20px;
+      box-shadow: 0 12px 35px rgba(94,68,46,0.08);
+      overflow: hidden;
     }
 
     .hero-content {
-      max-width: 720px;
-      background: rgba(255,255,255,0.72);
-      padding: 40px 25px;
-      border-radius: 28px;
-      box-shadow: 0 15px 40px rgba(94,68,46,0.12);
+      max-width: 650px;
     }
 
     .hero h1 {
-      font-family: 'Amatic SC', san serif;
-      font-size: clamp(3.8rem, 12vw, 7rem);
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(55px, 10vw, 90px);
       font-weight: 400;
+      margin: 0 0 5px;
     }
 
     .hero p {
-      margin-top: 8px;
-      font-size: 1.05rem;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 10px auto 22px;
     }
 
-    .hero-buttons {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
+    .hero-button,
     .button {
       display: inline-block;
-      padding: 12px 23px;
+      padding: 13px 24px;
       border-radius: 14px;
-      font-weight: 600;
-      transition: 0.25s ease;
-    }
-
-    .button-primary {
-      background: var(--pomegranate);
+      background: #C85555;
       color: white;
+      transition: 0.2s ease;
     }
 
-    .button-secondary {
-      background: var(--butter);
-      color: var(--brown);
-    }
-
+    .hero-button:hover,
     .button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 18px rgba(94,68,46,0.14);
+      transform: translateY(-2px);
+      opacity: 0.92;
     }
-
-    /* GENERAL */
 
     section {
-      padding: 75px 20px;
-    }
-
-    .section-inner {
-      max-width: 1150px;
-      margin: auto;
+      max-width: 1100px;
+      margin: 65px auto;
+      padding: 0 18px;
     }
 
     .section-title {
       text-align: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.2rem;
+      font-family: "Great Vibes", cursive;
+      font-size: 46px;
       font-weight: 400;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .section-subtitle {
-      text-align: center;
+    .section-intro {
       max-width: 650px;
-      margin: 0 auto 38px;
-      font-size: 0.95rem;
-    }
-
-    /* BRAND INTRO */
-
-    .intro {
-      background: white;
       text-align: center;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+      font-size: 14px;
     }
-
-    .intro-text {
-      max-width: 720px;
-      margin: auto;
-      font-size: 1.08rem;
-    }
-
-    .flower {
-      margin: 20px 0;
-      font-size: 1.4rem;
-    }
-
-    /* PRODUCTS */
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 22px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 22px;
-      padding: 15px;
-      box-shadow: 0 10px 28px rgba(94,68,46,0.08);
-      transition: 0.3s ease;
-      overflow: hidden;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 32px rgba(94,68,46,0.14);
-    }
-
-    .product-image {
-      aspect-ratio: 1 / 1;
-      border-radius: 17px;
-      background: var(--butter);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      margin-bottom: 16px;
-    }
-
-    .product-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-    }
-
-    .product-card p {
-      font-size: 0.88rem;
-      min-height: 55px;
-    }
-
-    .price {
-      color: var(--pomegranate);
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-top: 8px;
-    }
-
-    /* CATEGORIES */
 
     .categories {
-  background-color: #DDEEF5;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 28px,
-      rgba(255, 255, 255, 0.38) 28px 56px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 28px,
-      rgba(255, 255, 255, 0.38) 28px 56px
-    );
-    }
-
-    .category-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
 
     .category {
       background: white;
-      padding: 30px 20px;
-      border-radius: 22px;
+      border-radius: 20px;
+      padding: 28px 15px;
       text-align: center;
-      transition: 0.25s ease;
+      box-shadow: 0 8px 24px rgba(94,68,46,0.07);
+      transition: 0.2s ease;
     }
 
     .category:hover {
@@ -296,113 +173,227 @@
     }
 
     .category-icon {
-      font-size: 2.5rem;
+      font-size: 38px;
       margin-bottom: 10px;
     }
 
-    /* ABOUT */
+    .category h3 {
+      margin: 5px 0;
+      font-size: 17px;
+    }
 
-    .about {
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
       background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(94,68,46,0.07);
+      transition: 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      height: 240px;
+      background: #fffdf4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 65px;
+    }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-info h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .product-info p {
+      margin: 5px 0 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #767B39;
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .product-button {
+      display: inline-block;
+      background: #767B39;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
     }
 
     .about-box {
-      max-width: 800px;
-      margin: auto;
-      background: var(--vanilla);
-      padding: 35px 25px;
+      background: white;
       border-radius: 25px;
-      box-shadow: 0 10px 25px rgba(94,68,46,0.07);
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(94,68,46,0.07);
     }
 
     .about-box p {
-      margin-bottom: 15px;
+      max-width: 720px;
+      margin: 10px auto;
+      line-height: 1.8;
+      font-size: 14px;
     }
-
-    /* INFO */
 
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
     .info-card {
       background: white;
-      padding: 25px;
       border-radius: 20px;
+      padding: 25px;
       text-align: center;
+      box-shadow: 0 8px 25px rgba(94,68,46,0.07);
     }
 
     .info-card h3 {
-      margin-bottom: 8px;
-      color: var(--bistre);
+      font-family: "Great Vibes", cursive;
+      font-size: 30px;
+      font-weight: 400;
+      margin: 5px 0 10px;
     }
 
-    /* FOOTER */
+    .info-card p {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .social-box {
+      text-align: center;
+      background: #FFEFB9;
+      border-radius: 25px;
+      padding: 35px 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      background: white;
+      padding: 11px 17px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      background: white;
+      margin-bottom: 10px;
+      border-radius: 14px;
+      padding: 15px 18px;
+      box-shadow: 0 5px 15px rgba(94,68,46,0.05);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    details p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #767B39;
+    }
 
     footer {
-      background: var(--brown);
-      color: var(--vanilla);
+      margin-top: 70px;
+      background: #5E442E;
+      color: #FFF8E2;
       padding: 45px 20px;
       text-align: center;
     }
 
-    footer .footer-logo {
-      font-family: 'Amatic SC', san serif;
-      font-size: 3rem;
+    .footer-logo {
+      font-family: "Shadows Into Light Two", cursive;
+      font-size: 34px;
     }
 
-    footer p {
-      margin-top: 7px;
-      font-size: 0.9rem;
+    .footer-tagline {
+      margin-top: 3px;
+      font-size: 13px;
     }
 
-    .socials {
-      margin-top: 20px;
+    .footer-links {
+      margin: 22px 0;
       display: flex;
       justify-content: center;
       gap: 18px;
       flex-wrap: wrap;
+      font-size: 13px;
     }
 
-    .socials a {
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 12px;
-      transition: 0.2s ease;
+    .footer-contact {
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    .socials a:hover {
-      background: rgba(255,255,255,0.12);
+    @media (max-width: 800px) {
+
+      .nav-wrap {
+        flex-direction: column;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* MOBILE */
+    @media (max-width: 520px) {
 
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 2.5rem;
+      .products {
+        grid-template-columns: 1fr;
       }
 
-      nav {
-        gap: 13px;
-        font-size: 0.82rem;
+      .hero-box {
+        min-height: 330px;
       }
 
-      .hero {
-        min-height: 480px;
-      }
-
-      .hero-content {
-        padding: 32px 18px;
-      }
-
-      section {
-        padding: 58px 16px;
+      .categories {
+        grid-template-columns: 1fr 1fr;
       }
 
       .section-title {
-        font-size: 2.8rem;
+        font-size: 40px;
       }
     }
   </style>
@@ -410,275 +401,65 @@
 
 <body>
 
-  <header>
-    <div class="header-inner">
+<header>
 
-      <div class="logo">AELORIA</div>
+  <div class="nav-wrap">
 
-      <div class="tagline">its blessing to be Me</div>
+    <a href="index.html" class="logo">AELORIA</a>
 
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#shop.html">Shop</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="cart.html">Cart 🛍️</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+  <div class="hero-box">
+
+    <div class="hero-content">
+
+      <h1>AELORIA</h1>
+
+      <p>
+        Handmade little pieces of whimsy,
+        created with love for your keys,
+        bags and everyday adventures.
+      </p>
+
+      <a href="shop.html" class="hero-button">
+        Explore the Shop
+      </a>
 
     </div>
-  </header>
 
+  </div>
 
-  <main>
+</div>
 
-    <!-- HERO -->
 
-    <section class="hero" id="home">
+<!-- CATEGORIES -->
 
-      <div class="hero-content">
+<section>
 
-        <h1>AELORIA</h1>
+  <h2 class="section-title">A Little World of Whimsy</h2>
 
-        <p>
-          Handmade & Hand Painted Crochet Character Charms
-          & Clay Frame Charms for ur Keychains & Bags.
-        </p>
+  <p class="section-intro">
+    Discover tiny handmade companions and nostalgic little
+    treasures inspired by flowers, stories, vintage frames
+    and the magic of an artist's desk.
+  </p>
 
-        <div class="hero-buttons">
-          <a class="button button-primary" href="#shop">
-            Explore the Shop
-          </a>
+  <div class="categories">
 
-          <a class="button button-secondary" href="#about">
-            Meet the Artist
-          </a>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- INTRO -->
-
-    <section class="intro">
-
-      <div class="section-inner">
-
-        <h2 class="section-title">A little piece of Aeloria</h2>
-
-        <div class="flower">🌷 ✦ 🌿 ✦ 🌷</div>
-
-        <p class="intro-text">
-          Tiny handmade things, created slowly and lovingly
-          from an artist's desk in Pune, India.
-          Every little charm is made to bring a little whimsy
-          wherever you take it.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- SHOP -->
-
-    <section id="shop">
-
-      <div class="section-inner">
-
-        <h2 class="section-title">Best Sellers</h2>
-
-        <p class="section-subtitle">
-          Meet some of the little characters currently living
-          in the AELORIA garden.
-        </p>
-
-
-        <div class="products">
-
-
-          <!-- PRODUCT 1 -->
-
-          <article class="product-card">
-
-            <div class="product-image">
-              🐈‍⬛🌸
-            </div>
-
-            <h3>Cat Petal Crochet Charm</h3>
-
-            <p>
-              A black cat with a flower tucked over one ear.
-              Mini plushie charm with keyring.
-            </p>
-
-            <div class="price">₹179</div>
-
-          </article>
-
-
-          <!-- PRODUCT 2 -->
-
-          <article class="product-card">
-
-            <div class="product-image">
-              🧙🏻‍♂️🐈
-            </div>
-
-            <h3>Wizard Cat Crochet Charm</h3>
-
-            <p>
-              A grey cat with wand, hat & cape.
-              Mini plushie charm with keyring.
-            </p>
-
-            <div class="price">₹199</div>
-
-          </article>
-
-
-          <!-- PRODUCT 3 -->
-
-          <article class="product-card">
-
-            <div class="product-image">
-              🐰🌷
-            </div>
-
-            <h3>Rosie Bunny</h3>
-
-            <p>
-              A white bunny with pink hat & dress.
-              Mini plushie charm with keyring.
-            </p>
-
-            <div class="price">₹199</div>
-
-          </article>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CATEGORIES -->
-
-    <section class="categories" id="categories">
-
-      <div class="section-inner">
-
-        <h2 class="section-title">Shop by Category</h2>
-
-        <p class="section-subtitle">
-          Little handmade worlds, each with their own kind of magic.
-        </p>
-
-
-        <div class="category-grid">
-
-          <div class="category">
-            <div class="category-icon">🧶</div>
-            <h3>Crochet Characters</h3>
-            <p>Soft little friends made by hand.</p>
-          </div>
-
-          <div class="category">
-            <div class="category-icon">🌸</div>
-            <h3>Clay Whimsy Frames</h3>
-            <p>Whimsical handmade clay creations.</p>
-          </div>
-
-          <div class="category">
-            <div class="category-icon">🕯️</div>
-            <h3>Clay Vintage Frames</h3>
-            <p>Little pieces inspired by another era.</p>
-          </div>
-
-          <div class="category">
-            <div class="category-icon">🎀</div>
-            <h3>Combo Offers</h3>
-            <p>Little bundles made for gifting.</p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ABOUT -->
-
-    <section class="about" id="about">
-
-      <div class="section-inner">
-
-        <h2 class="section-title">About AELORIA</h2>
-
-        <div class="about-box">
-
-          <p>
-            Hi! I'm Anushree Jadhav, 19 yrs old Artist & Owner
-            of AELORIA based in Pune, India.
-          </p>
-
-          <p>
-            Being an artist I always knew i wanted to start
-            something of my own around art.
-            And at age of 19 I finally decided to start -
-            and thats how Aeloria was Born.
-          </p>
-
-          <p>
-            Its just Me & my desk doing all the bits of Aeloria.
-            I hope you enjoy my products as much as i do creating
-            them for you!
-          </p>
-
-          <p>
-            Happy Art Shopping🌷
-          </p>
-
-          <p>
-            Love<br>
-            Anushree
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SHOP INFO -->
-
-    <section>
-
-      <div class="section-inner">
-
-        <h2 class="section-title">Aeloria Shop Info</h2>
-
-        <div class="info-grid">
-
-          <div class="info-card">
-            <h3>🌷 Handmade</h3>
-            <p>
-              Each piece is handmade with care,
-              so tiny variations are part of its charm.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <h3>📦 Dispatch</h3>
-            <p>
-              Orders are dispatched within
-              7–14 business days.
-            </p>
-          </div>
-
-          <div
+    <a href="shop.html?category=Crochet%20Characters"
