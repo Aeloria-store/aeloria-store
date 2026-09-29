@@ -769,6 +769,80 @@
 
     </section>
 
+    <section
+    id="track-order"
+    style="
+      padding:60px 20px;
+      background:#FFF8E2;
+      text-align:center;
+    "
+  >
+
+    <h2
+      style="
+        font-family:'Great Vibes', cursive;
+        font-size:38px;
+        color:#5E442E;
+        margin-bottom:10px;
+      "
+    >
+      Track Your Order
+    </h2>
+
+    <p
+      style="
+        font-family:'Playfair Display', serif;
+        color:#5E442E;
+        margin-bottom:22px;
+      "
+    >
+      Enter your order number to check your order status ♡
+    </p>
+
+    <input
+      id="trackOrderNumber"
+      type="text"
+      placeholder="Enter your order number"
+      style="
+        width:100%;
+        max-width:360px;
+        padding:12px 14px;
+        border:1px solid #ddd;
+        border-radius:12px;
+        font-family:'Playfair Display', serif;
+        box-sizing:border-box;
+      "
+    >
+
+    <button
+      onclick="trackOrder()"
+      style="
+        display:block;
+        margin:12px auto 0;
+        padding:11px 22px;
+        border:0;
+        border-radius:12px;
+        background:#F7BCB0;
+        color:#5E442E;
+        font-family:'Playfair Display', serif;
+        cursor:pointer;
+      "
+    >
+      Track Order
+    </button>
+
+    <div
+      id="trackingResult"
+      style="
+        max-width:420px;
+        margin:22px auto 0;
+        font-family:'Playfair Display', serif;
+        color:#5E442E;
+      "
+    ></div>
+
+  </section>
+
   </main>
 
 
@@ -791,7 +865,99 @@
     </p>
 
   </footer>
+<script>
+  function trackOrder() {
 
+    const orderNumber =
+      document
+        .getElementById("trackOrderNumber")
+        .value
+        .trim();
+
+    const result =
+      document.getElementById("trackingResult");
+
+    const savedOrder =
+      localStorage.getItem("aeloriaPendingOrder");
+
+    if (!orderNumber) {
+      result.innerHTML =
+        "Please enter your order number ♡";
+      return;
+    }
+
+    if (!savedOrder) {
+      result.innerHTML =
+        "We couldn't find that order. Please check your order number ♡";
+      return;
+    }
+
+    const order =
+      JSON.parse(savedOrder);
+
+    if (order.orderNumber !== orderNumber) {
+      result.innerHTML =
+        "We couldn't find that order. Please check your order number ♡";
+      return;
+    }
+
+    result.innerHTML = `
+      <div
+        style="
+          margin-top:20px;
+          padding:20px;
+          border-radius:16px;
+          background:#ffffff;
+          box-shadow:0 4px 14px rgba(0,0,0,0.08);
+        "
+      >
+
+        <strong>
+          Order Status
+        </strong>
+
+        <p>
+          ${order.orderStatus || "Pending Payment"}
+        </p>
+
+        <strong>
+          Payment Status
+        </strong>
+
+        <p>
+          ${order.paymentStatus || "Pending Verification"}
+        </p>
+
+        ${
+          order.courier
+            ? `
+              <strong>
+                Courier
+              </strong>
+              <p>
+                ${order.courier}
+              </p>
+            `
+            : ""
+        }
+
+        ${
+          order.trackingNumber
+            ? `
+              <strong>
+                Tracking Number
+              </strong>
+              <p>
+                ${order.trackingNumber}
+              </p>
+            `
+            : ""
+        }
+
+      </div>
+    `;
+  }
+</script>
 
 </body>
 </html>
