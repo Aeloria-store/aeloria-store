@@ -896,7 +896,7 @@
     const order =
       JSON.parse(savedOrder);
 
-    if (order.orderNumber !== orderNumber) {
+    if (order.orderId !== orderNumber) {
       result.innerHTML =
         "We couldn't find that order. Please check your order number ♡";
       return;
