@@ -194,8 +194,60 @@
         </div>
 
         <div class="status">
-          ${order.paymentStatus}
-        </div>
+  Payment:
+  <strong>${order.paymentStatus}</strong>
+</div>
+
+<select
+  id="paymentStatus"
+  style="
+    margin-top:10px;
+    padding:9px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-family:inherit;
+  "
+>
+
+  <option
+    value="Pending Verification"
+    ${order.paymentStatus === "Pending Verification" ? "selected" : ""}
+  >
+    Pending Verification
+  </option>
+
+  <option
+    value="Payment Verified"
+    ${order.paymentStatus === "Payment Verified" ? "selected" : ""}
+  >
+    Payment Verified
+  </option>
+
+  <option
+    value="Payment Failed"
+    ${order.paymentStatus === "Payment Failed" ? "selected" : ""}
+  >
+    Payment Failed
+  </option>
+
+</select>
+
+<button
+  onclick="updatePaymentStatus()"
+  style="
+    display:block;
+    margin-top:10px;
+    padding:9px 14px;
+    border:0;
+    border-radius:10px;
+    background:#FFEFB9;
+    color:#5E442E;
+    font-family:inherit;
+    cursor:pointer;
+  "
+>
+  Save Payment Status
+</button>
 
         <p>
           <strong>Customer</strong><br>
@@ -255,7 +307,36 @@
     `;
 
   }
+function updatePaymentStatus() {
 
+  const savedOrder =
+    localStorage.getItem(
+      "aeloriaPendingOrder"
+    );
+
+  if (!savedOrder) {
+    return;
+  }
+
+  const order =
+    JSON.parse(savedOrder);
+
+  const newStatus =
+    document.getElementById(
+      "paymentStatus"
+    ).value;
+
+  order.paymentStatus =
+    newStatus;
+
+  localStorage.setItem(
+    "aeloriaPendingOrder",
+    JSON.stringify(order)
+  );
+
+  location.reload();
+
+}
 </script>
 </body>
 
