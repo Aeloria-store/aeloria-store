@@ -387,8 +387,9 @@
 
   } else {
 
-    const products =
-      JSON.parse(savedData);
+    const products = buyNowData
+  ? [JSON.parse(buyNowData)]
+  : JSON.parse(cartData);
 
     let subtotal = 0;
 
