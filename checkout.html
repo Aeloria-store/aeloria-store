@@ -547,12 +547,8 @@ products.forEach(item => {
       );
 
 
-      document.getElementById("message").innerHTML = `
-        <strong>Order details saved ♡</strong><br>
-        Order number: ${orderId}<br><br>
-        Your payment will be manually verified before
-        your order is processed.
-      `;
+      window.location.href =
+  "order-success.html";
 
     });
 
