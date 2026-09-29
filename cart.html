@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AELORIA | Cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --vanilla: #FFF8E2;
+      --butter: #FFEFB9;
+      --brown: #5E442E;
+      --pomegranate: #C85555;
+      --bistre: #767B39;
+      --melon: #F7BCB0;
+      --sky: #DDEEF5;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--vanilla);
+      color: var(--brown);
+      font-family: "Playfair Display", serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand {
+      font-family: "Shadows Into Light Two", cursive !important;
+      letter-spacing: 1px;
+    }
+
+    header {
+      text-align: center;
+      padding: 28px 20px 20px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(94, 68, 46, 0.08);
+    }
+
+    .logo {
+      font-family: "Shadows Into Light Two", cursive !important;
+      font-size: 50px;
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      margin-top: 4px;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    nav {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--pomegranate);
+    }
+
+    .page {
+      max-width: 950px;
+      margin: auto;
+      padding: 55px 20px 80px;
+    }
+
+    .page-title {
+      font-family: "Great Vibes", cursive;
+      font-size: 58px;
+      font-weight: 400;
+      text-align: center;
+      margin: 0 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 15px;
+    }
+
+    .empty {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 50px 25px;
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(94, 68, 46, 0.08);
+    }
+
+    .empty-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .empty h2 {
+      font-family: "Great Vibes", cursive;
+      font-size: 40px;
+      font-weight: 400;
+      margin: 5px 0 10px;
+    }
+
+    .cart-box {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .items {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 10px 28px rgba(94, 68, 46, 0.08);
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .item-image {
+      min-height: 110px;
+      border-radius: 20px;
+      background: var(--sky);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .item-name {
+      font-family: "Great Vibes", cursive;
+      font-size: 34px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .item-price {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .item-quantity {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .item-note {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--bistre);
+    }
+
+    .summary {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 25px;
+      box-shadow: 0 10px 28px rgba(94, 68, 46, 0.08);
+      position: sticky;
+      top: 20px;
+    }
+
+    .summary h2 {
+      font-family: "Great Vibes", cursive;
+      font-size: 38px;
+      font-weight: 400;
+      margin: 0 0 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .total {
+      border-top: 1px solid rgba(94, 68, 46, 0.15);
+      margin-top: 18px;
+      padding-top: 18px;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      text-align: center;
+      background: var(--pomegranate);
+      color: white;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      background: var(--butter);
+      color: var(--brown);
+    }
+
+    .shipping-note {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--butter);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: var(--white);
+      text-align: center;
+      padding: 45px 20px;
+      border-top: 1px solid rgba(94, 68, 46, 0.08);
+    }
+
+    .footer-logo {
+      font-family: "Shadows Into Light
