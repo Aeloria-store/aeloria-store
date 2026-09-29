@@ -456,8 +456,10 @@ products.forEach(item => {
       event.preventDefault();
 
 
-      const product =
-        JSON.parse(savedData);
+      const products =
+  buyNowData
+    ? [JSON.parse(buyNowData)]
+    : JSON.parse(cartData);
 
 
       const orderId =
@@ -465,11 +467,11 @@ products.forEach(item => {
         Date.now().toString().slice(-8);
 
 
-      const quantity =
-        product.quantity || 1;
+      let subtotal = 0;
 
-      const subtotal =
-        product.price * quantity;
+products.forEach(item => {
+  subtotal += item.price * (item.quantity || 1);
+});
 
       const shipping =
         75;
@@ -516,7 +518,7 @@ products.forEach(item => {
 
         },
 
-        product: product,
+        products: products,
 
         subtotal: subtotal,
 
