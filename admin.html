@@ -533,85 +533,544 @@ function updateOrderStatus() {
 
   if (!savedOrder) {
     return;
+<script>
+
+  const ordersBox =
+    document.getElementById("orders");
+
+  const savedOrders =
+    JSON.parse(
+      localStorage.getItem("aeloriaOrders") || "[]"
+    );
+
+  if (savedOrders.length === 0) {
+
+    ordersBox.innerHTML = `
+      <div class="empty">
+        No orders found yet.
+      </div>
+    `;
+
+  } else {
+
+    ordersBox.innerHTML =
+      savedOrders
+        .slice()
+        .reverse()
+        .map((order) => {
+
+          const products =
+            order.products || [];
+
+          return `
+
+            <div
+              class="order"
+              data-order-id="${order.orderId}"
+            >
+
+              <div class="order-id">
+                ${order.orderId}
+              </div>
+
+              <div class="status">
+                Payment:
+                <strong>
+                  ${order.paymentStatus || "Pending Verification"}
+                </strong>
+              </div>
+
+              <select
+                id="paymentStatus-${order.orderId}"
+                style="
+                  margin-top:10px;
+                  padding:9px;
+                  border-radius:10px;
+                  border:1px solid #ddd;
+                  font-family:inherit;
+                "
+              >
+
+                <option
+                  value="Pending Verification"
+                  ${order.paymentStatus === "Pending Verification" ? "selected" : ""}
+                >
+                  Pending Verification
+                </option>
+
+                <option
+                  value="Payment Verified"
+                  ${order.paymentStatus === "Payment Verified" ? "selected" : ""}
+                >
+                  Payment Verified
+                </option>
+
+                <option
+                  value="Payment Failed"
+                  ${order.paymentStatus === "Payment Failed" ? "selected" : ""}
+                >
+                  Payment Failed
+                </option>
+
+              </select>
+
+              <button
+                onclick="updatePaymentStatus('${order.orderId}')"
+                style="
+                  display:block;
+                  margin-top:10px;
+                  padding:9px 14px;
+                  border:0;
+                  border-radius:10px;
+                  background:#FFEFB9;
+                  color:#5E442E;
+                  font-family:inherit;
+                  cursor:pointer;
+                "
+              >
+                Save Payment Status
+              </button>
+
+
+              <div style="margin-top:18px;">
+
+                <div class="status">
+                  Order:
+                  <strong>
+                    ${order.orderStatus || "Pending Payment"}
+                  </strong>
+                </div>
+
+                <select
+                  id="orderStatus-${order.orderId}"
+                  style="
+                    margin-top:10px;
+                    padding:9px;
+                    border-radius:10px;
+                    border:1px solid #ddd;
+                    font-family:inherit;
+                  "
+                >
+
+                  <option
+                    value="Pending Payment"
+                    ${order.orderStatus === "Pending Payment" ? "selected" : ""}
+                  >
+                    Pending Payment
+                  </option>
+
+                  <option
+                    value="Processing"
+                    ${order.orderStatus === "Processing" ? "selected" : ""}
+                  >
+                    Processing
+                  </option>
+
+                  <option
+                    value="Shipped"
+                    ${order.orderStatus === "Shipped" ? "selected" : ""}
+                  >
+                    Shipped
+                  </option>
+
+                  <option
+                    value="Delivered"
+                    ${order.orderStatus === "Delivered" ? "selected" : ""}
+                  >
+                    Delivered
+                  </option>
+
+                </select>
+
+                <button
+                  onclick="updateOrderStatus('${order.orderId}')"
+                  style="
+                    display:block;
+                    margin-top:10px;
+                    padding:9px 14px;
+                    border:0;
+                    border-radius:10px;
+                    background:#FFEFB9;
+                    color:#5E442E;
+                    font-family:inherit;
+                    cursor:pointer;
+                  "
+                >
+                  Save Order Status
+                </button>
+
+              </div>
+
+
+              <div style="margin-top:20px;">
+
+                <strong>
+                  Customer
+                </strong>
+
+                <p>
+                  ${order.customer?.name || ""}
+                </p>
+
+                <p>
+                  ${order.customer?.mobile || ""}
+                </p>
+
+                <p>
+                  ${order.customer?.email || ""}
+                </p>
+
+                <p>
+                  ${order.customer?.address || ""}
+                </p>
+
+              </div>
+
+
+              <div style="margin-top:20px;">
+
+                <strong>
+                  Products
+                </strong>
+
+                ${
+                  products.length
+                    ? products.map(item => `
+                        <div
+                          style="
+                            margin-top:10px;
+                            padding:12px;
+                            background:#FFF8E2;
+                            border-radius:10px;
+                          "
+                        >
+                          <strong>
+                            ${item.name}
+                          </strong>
+
+                          <div>
+                            Quantity:
+                            ${item.quantity || 1}
+                          </div>
+
+                          <div>
+                            ₹${item.price * (item.quantity || 1)}
+                          </div>
+                        </div>
+                      `).join("")
+                    : "<p>No product details found.</p>"
+                }
+
+              </div>
+
+
+              <div class="total">
+                Total: ₹${order.total}
+              </div>
+
+
+              <div style="margin-top:20px;">
+
+                <strong>
+                  Admin Notes
+                </strong>
+
+                <textarea
+                  id="adminNotes-${order.orderId}"
+                  placeholder="Private note about this order"
+                  style="
+                    display:block;
+                    width:100%;
+                    min-height:90px;
+                    margin-top:8px;
+                    padding:10px;
+                    border:1px solid #ddd;
+                    border-radius:10px;
+                    font-family:inherit;
+                    box-sizing:border-box;
+                  "
+                >${order.adminNotes || ""}</textarea>
+
+                <button
+                  onclick="saveAdminNotes('${order.orderId}')"
+                  style="
+                    margin-top:10px;
+                    padding:9px 14px;
+                    border:0;
+                    border-radius:10px;
+                    background:#FFEFB9;
+                    color:#5E442E;
+                    font-family:inherit;
+                    cursor:pointer;
+                  "
+                >
+                  Save Note
+                </button>
+
+              </div>
+
+
+              <div style="margin-top:20px;">
+
+                <strong>
+                  Shipping
+                </strong>
+
+                <select
+                  id="courier-${order.orderId}"
+                  style="
+                    display:block;
+                    width:100%;
+                    margin-top:8px;
+                    padding:10px;
+                    border:1px solid #ddd;
+                    border-radius:10px;
+                    font-family:inherit;
+                  "
+                >
+
+                  <option value="">
+                    Select Courier
+                  </option>
+
+                  <option
+                    value="India Post"
+                    ${order.courier === "India Post" ? "selected" : ""}
+                  >
+                    India Post
+                  </option>
+
+                  <option
+                    value="DTDC"
+                    ${order.courier === "DTDC" ? "selected" : ""}
+                  >
+                    DTDC
+                  </option>
+
+                </select>
+
+
+                <input
+                  id="trackingNumber-${order.orderId}"
+                  type="text"
+                  value="${order.trackingNumber || ""}"
+                  placeholder="Enter tracking number"
+                  style="
+                    display:block;
+                    width:100%;
+                    margin-top:8px;
+                    padding:10px;
+                    border:1px solid #ddd;
+                    border-radius:10px;
+                    font-family:inherit;
+                    box-sizing:border-box;
+                  "
+                >
+
+
+                <button
+                  onclick="saveShipping('${order.orderId}')"
+                  style="
+                    margin-top:10px;
+                    padding:9px 14px;
+                    border:0;
+                    border-radius:10px;
+                    background:#F7BCB0;
+                    color:#5E442E;
+                    font-family:inherit;
+                    cursor:pointer;
+                  "
+                >
+                  Save Shipping Details
+                </button>
+
+              </div>
+
+
+              <div class="note">
+
+                <strong>
+                  UPI Transaction ID:
+                </strong>
+
+                <br>
+
+                ${order.transactionId || "Not provided"}
+
+              </div>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
   }
 
-  const order =
-    JSON.parse(savedOrder);
 
-  const newStatus =
-    document.getElementById(
-      "orderStatus"
-    ).value;
+  function getOrders() {
 
-  order.orderStatus =
-    newStatus;
+    return JSON.parse(
+      localStorage.getItem("aeloriaOrders") || "[]"
+    );
 
-  localStorage.setItem(
-    "aeloriaPendingOrder",
-    JSON.stringify(order)
-  );
+  }
+
+
+  function saveOrders(orders) {
+
+    localStorage.setItem(
+      "aeloriaOrders",
+      JSON.stringify(orders)
+    );
+
+  }
+
+
+  function updatePaymentStatus(orderId) {
+
+    const orders =
+      getOrders();
+
+    const order =
+      orders.find(
+        item => item.orderId === orderId
+      );
+
+    if (!order) {
+      return;
+    }
+
+    const newStatus =
+      document.getElementById(
+        `paymentStatus-${orderId}`
+      ).value;
+
+    order.paymentStatus =
+      newStatus;
+
+    saveOrders(orders);
+
+    localStorage.setItem(
+      "aeloriaPendingOrder",
+      JSON.stringify(order)
+    );
 
     location.reload();
 
-}
+  }
 
-function saveAdminNotes() {
 
-  const savedOrder =
-    localStorage.getItem(
-      "aeloriaPendingOrder"
+  function updateOrderStatus(orderId) {
+
+    const orders =
+      getOrders();
+
+    const order =
+      orders.find(
+        item => item.orderId === orderId
+      );
+
+    if (!order) {
+      return;
+    }
+
+    const newStatus =
+      document.getElementById(
+        `orderStatus-${orderId}`
+      ).value;
+
+    order.orderStatus =
+      newStatus;
+
+    saveOrders(orders);
+
+    localStorage.setItem(
+      "aeloriaPendingOrder",
+      JSON.stringify(order)
     );
 
-  if (!savedOrder) {
-    return;
+    location.reload();
+
   }
 
-  const order =
-    JSON.parse(savedOrder);
 
-  const notes =
-    document.getElementById(
-      "adminNotes"
-    ).value;
+  function saveAdminNotes(orderId) {
 
-  order.adminNotes =
-    notes;
+    const orders =
+      getOrders();
 
-  localStorage.setItem(
-    "aeloriaPendingOrder",
-    JSON.stringify(order)
-  );
+    const order =
+      orders.find(
+        item => item.orderId === orderId
+      );
 
-  location.reload();
+    if (!order) {
+      return;
+    }
 
-}
-function saveShipping() {
-  const savedOrder =
-    localStorage.getItem("aeloriaPendingOrder");
+    const notes =
+      document.getElementById(
+        `adminNotes-${orderId}`
+      ).value;
 
-  if (!savedOrder) {
-    return;
+    order.adminNotes =
+      notes;
+
+    saveOrders(orders);
+
+    localStorage.setItem(
+      "aeloriaPendingOrder",
+      JSON.stringify(order)
+    );
+
+    location.reload();
+
   }
 
-  const order =
-    JSON.parse(savedOrder);
 
-  const courier =
-    document.getElementById("courier").value;
+  function saveShipping(orderId) {
 
-  const trackingNumber =
-    document.getElementById("trackingNumber").value;
+    const orders =
+      getOrders();
 
-  order.courier = courier;
-  order.trackingNumber = trackingNumber;
+    const order =
+      orders.find(
+        item => item.orderId === orderId
+      );
 
-  localStorage.setItem(
-    "aeloriaPendingOrder",
-    JSON.stringify(order)
-  );
+    if (!order) {
+      return;
+    }
 
-  location.reload();
-}
+    const courier =
+      document.getElementById(
+        `courier-${orderId}`
+      ).value;
+
+    const trackingNumber =
+      document.getElementById(
+        `trackingNumber-${orderId}`
+      ).value;
+
+    order.courier =
+      courier;
+
+    order.trackingNumber =
+      trackingNumber;
+
+    saveOrders(orders);
+
+    localStorage.setItem(
+      "aeloriaPendingOrder",
+      JSON.stringify(order)
+    );
+
+    location.reload();
+
+  }
+
 </script>
 </body>
 
