@@ -354,7 +354,45 @@
         <div class="total">
           Total: ₹${order.total}
         </div>
+<div style="margin-top:16px;">
 
+  <strong>
+    Admin Notes
+  </strong>
+
+  <textarea
+    id="adminNotes"
+    placeholder="Add a private note about this order..."
+    style="
+      display:block;
+      width:100%;
+      min-height:90px;
+      margin-top:8px;
+      padding:10px;
+      border:1px solid #ddd;
+      border-radius:12px;
+      font-family:inherit;
+      resize:vertical;
+    "
+  >${order.adminNotes || ""}</textarea>
+
+  <button
+    onclick="saveAdminNotes()"
+    style="
+      margin-top:10px;
+      padding:9px 14px;
+      border:0;
+      border-radius:10px;
+      background:#FFEFB9;
+      color:#5E442E;
+      font-family:inherit;
+      cursor:pointer;
+    "
+  >
+    Save Note
+  </button>
+
+</div>
         <div class="note">
 
           <strong>
@@ -424,6 +462,37 @@ function updateOrderStatus() {
 
   order.orderStatus =
     newStatus;
+
+  localStorage.setItem(
+    "aeloriaPendingOrder",
+    JSON.stringify(order)
+  );
+
+    location.reload();
+
+}
+
+function saveAdminNotes() {
+
+  const savedOrder =
+    localStorage.getItem(
+      "aeloriaPendingOrder"
+    );
+
+  if (!savedOrder) {
+    return;
+  }
+
+  const order =
+    JSON.parse(savedOrder);
+
+  const notes =
+    document.getElementById(
+      "adminNotes"
+    ).value;
+
+  order.adminNotes =
+    notes;
 
   localStorage.setItem(
     "aeloriaPendingOrder",
