@@ -242,3 +242,177 @@
 
     .footer-logo {
       font-family: "Shadows Into Light
+    Two", cursive !important;
+      font-size: 42px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding-top: 40px;
+      }
+
+      .page-title {
+        font-size: 48px;
+      }
+
+      .cart-box {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+
+      .cart-item {
+        grid-template-columns: 85px 1fr;
+        gap: 14px;
+      }
+
+      .item-image {
+        min-height: 85px;
+        font-size: 42px;
+      }
+
+      .item-name {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">
+    <div class="logo">AELORIA</div>
+  </a>
+
+  <div class="tagline">its blessing to be Me</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <h1 class="page-title">Your Cart</h1>
+
+  <p class="intro">
+    A little collection of handmade magic, waiting for you ♡
+  </p>
+
+  <div id="cartContent"></div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">AELORIA</div>
+  <p>Hand made & hand painted with love 🌷</p>
+</footer>
+
+<script>
+  const savedProduct = localStorage.getItem("aeloriaLastProduct");
+  const cartContent = document.getElementById("cartContent");
+
+  if (!savedProduct) {
+
+    cartContent.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🧺</div>
+        <h2>Your cart is empty</h2>
+        <p>Your little handmade treasures will appear here.</p>
+        <a href="shop.html" class="button">
+          Explore the Shop
+        </a>
+      </div>
+    `;
+
+  } else {
+
+    const product = JSON.parse(savedProduct);
+    const quantity = product.quantity || 1;
+    const subtotal = product.price * quantity;
+    const shipping = 75;
+    const total = subtotal + shipping;
+
+    cartContent.innerHTML = `
+
+      <div class="cart-box">
+
+        <div class="items">
+
+          <div class="cart-item">
+
+            <div class="item-image">
+              ${product.image || "🌷"}
+            </div>
+
+            <div>
+
+              <div class="item-name">
+                ${product.name}
+              </div>
+
+              <div class="item-price">
+                ₹${product.price}
+              </div>
+
+              <div class="item-quantity">
+                Quantity: ${quantity}
+              </div>
+
+              ${
+                product.note
+                  ? `<div class="item-note">
+                       Note: ${product.note}
+                     </div>`
+                  : ""
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="summary">
+
+          <h2>Order Summary</h2>
+
+          <div class="row">
+            <span>Subtotal</span>
+            <span>₹${subtotal}</span>
+          </div>
+
+          <div class="row">
+            <span>Shipping</span>
+            <span>₹${shipping}</span>
+          </div>
+
+          <div class="row total">
+            <span>Total</span>
+            <span>₹${total}</span>
+          </div>
+
+          <div class="shipping-note">
+            India shipping only · ₹75 shipping<br>
+            Dispatch in 7–14 business days
+          </div>
+
+          <a href="shop.html" class="button secondary">
+            Continue Shopping
+          </a>
+
+        </div>
+
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
