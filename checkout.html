@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AELORIA | Checkout</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --vanilla:#FFF8E2;
+      --butter:#FFEFB9;
+      --brown:#5E442E;
+      --pomegranate:#C85555;
+      --bistre:#767B39;
+      --melon:#F7BCB0;
+      --sky:#DDEEF5;
+      --white:#FFFFFF;
+    }
+
+    * {
+      box-sizing:border-box;
+    }
+
+    body {
+      margin:0;
+      background:var(--vanilla);
+      color:var(--brown);
+      font-family:"Playfair Display",serif;
+    }
+
+    a {
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .brand,
+    .logo,
+    .footer-logo {
+      font-family:"Shadows Into Light Two",cursive !important;
+      letter-spacing:1px;
+    }
+
+    header {
+      text-align:center;
+      background:var(--white);
+      padding:25px 20px;
+      border-bottom:1px solid rgba(94,68,46,.08);
+    }
+
+    .logo {
+      font-size:48px;
+    }
+
+    .tagline {
+      font-size:13px;
+      font-style:italic;
+    }
+
+    nav {
+      margin-top:16px;
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      flex-wrap:wrap;
+      font-size:14px;
+    }
+
+    .page {
+      max-width:950px;
+      margin:auto;
+      padding:45px 20px 70px;
+    }
+
+    .title {
+      text-align:center;
+      font-family:"Great Vibes",cursive;
+      font-size:58px;
+      font-weight:400;
+      margin:0 0 10px;
+    }
+
+    .intro {
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .checkout-grid {
+      display:grid;
+      grid-template-columns:1fr 330px;
+      gap:25px;
+    }
+
+    .box {
+      background:var(--white);
+      border-radius:22px;
+      padding:25px;
+      box-shadow:0 10px 28px rgba(94,68,46,.08);
+      margin-bottom:20px;
+    }
+
+    .box h2 {
+      font-family:"Great Vibes",cursive;
+      font-size:38px;
+      font-weight:400;
+      margin:0 0 20px;
+    }
+
+    label {
+      display:block;
+      margin:14px 0 7px;
+      font-size:14px;
+    }
+
+    input,
+    textarea {
+      width:100%;
+      padding:13px;
+      border:1px solid rgba(94,68,46,.2);
+      border-radius:12px;
+      background:var(--vanilla);
+      color:var(--brown);
+      font-family:"Playfair Display",serif;
+      font-size:14px;
+    }
+
+    textarea {
+      min-height:90px;
+      resize:vertical;
+    }
+
+    .payment {
+      background:var(--butter);
+      border-radius:18px;
+      padding:20px;
+      margin-top:20px;
+    }
+
+    .qr {
+      width:190px;
+      height:190px;
+      margin:15px auto;
+      border-radius:15px;
+      background:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      border:1px dashed var(--brown);
+    }
+
+    .warning {
+      font-size:13px;
+      line-height:1.6;
+      margin-top:12px;
+    }
+
+    .summary-item {
+      padding-bottom:15px;
+      border-bottom:1px solid rgba(94,68,46,.12);
+    }
+
+    .summary-name {
+      font-size:17px;
+      font-weight:600;
+    }
+
+    .row {
+      display:flex;
+      justify-content:space-between;
+      margin:12px 0;
+      gap:15px;
+    }
+
+    .total {
+      border-top:1px solid rgba(94,68,46,.15);
+      padding-top:15px;
+      font-weight:600;
+      font-size:19px;
+    }
+
+    .place-order {
+      width:100%;
+      border:0;
+      border-radius:14px;
+      padding:15px;
+      margin-top:20px;
+      background:var(--pomegranate);
+      color:white;
+      font-family:"Playfair Display",serif;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .place-order:hover {
+      transform:translateY(-2px);
+    }
+
+    .message {
+      margin-top:18px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    footer {
+      text-align:center;
+      background:var(--white);
+      padding:40px 20px;
+      border-top:1px solid rgba(94,68,46,.08);
+    }
+
+    .footer-logo {
+      font-size:40px;
+    }
+
+    @media(max-width:760px) {
+      .checkout-grid {
+        grid-template-columns:1fr;
+      }
+
+      .title {
+        font-size:48px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html">
+    <div class="logo">AELORIA</div>
+  </a>
+
+  <div class="tagline">its blessing to be Me</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart 🛒</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <h1 class="title">Checkout</h1>
+
+  <p class="intro">
+    Just a few little details before your handmade treasure begins its journey ♡
+  </p>
+
+  <div class="checkout-grid">
+
+    <div>
+
+      <div class="box">
+
+        <h2>Your Details</h2>
+
+        <form id="checkoutForm">
+
+          <label>Full Name *</label>
+          <input id="name" required>
+
+          <label>Mobile Number *</label>
+          <input id="mobile" type="tel" required>
+
+          <label>Email *</label>
+          <input id="email" type="email" required>
+
+          <label>House / Apartment *</label>
+          <input id="house" required>
+
+          <label>Street / Locality *</label>
+          <input id="street" required>
+
+          <label>City *</label>
+          <input id="city" required>
+
+          <label>State *</label>
+          <input id="state" required>
+
+          <label>Pincode *</label>
+          <input id="pincode" inputmode="numeric" required>
+
+          <label>Country</label>
+          <input id="country" value="India" readonly>
+
+          <label>Order Notes (optional)</label>
+          <textarea id="notes" placeholder="Anything you'd like us to know about your order?"></textarea>
+
+          <div class="payment">
+
+            <strong>UPI Payment</strong>
+
+            <p>
+              This order is 100% prepaid.
+              Please scan the AELORIA UPI QR and complete the payment.
+            </p>
+
+            <div class="qr">
+              YOUR AELORIA<br>
+              UPI QR<br>
+              WILL BE ADDED HERE
+            </div>
+
+            <label>UPI Transaction / Reference ID *</label>
+            <input id="transactionId" required>
+
+            <p class="warning">
+              ⚠️ Entering a transaction ID does not automatically confirm payment.
+              Your payment will be manually verified before the order is processed.
+            </p>
+
+            <label>
+              <input id="paymentConfirm" type="checkbox" required>
+              I have completed the UPI payment and entered the correct reference ID.
+            </label>
+
+          </div>
+
+          <button class="place-order" type="submit">
+            Place Order ♡
+          </button>
+
+          <div class="message" id="message"></div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="box">
+
+        <h2>Your Order</h2>
+
+        <div id="orderSummary">
+          Loading...
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">AELORIA</div>
+  <p>Hand made & hand painted with love 🌷</p>
+</footer>
+
+
+<script>
+
+  const buyNowData =
+    localStorage.getItem("aeloriaBuyNow");
+
+  const cartData =
+    localStorage.getItem("aeloriaLastProduct");
+
+  const savedData =
+    buyNowData || cartData;
+
+  const orderSummary =
+    document.getElementById("orderSummary");
+
+
+  if (!savedData) {
+
+    orderSummary.innerHTML = `
+      <p>Your cart is empty.</p>
+      <a href="shop.html">Return to Shop</a>
+    `;
+
+  } else {
+
+    const product =
+      JSON.parse(savedData);
+
+    const quantity =
+      product.quantity || 1;
+
+    const subtotal =
+      product.price * quantity;
+
+    const shipping =
+      75;
+
+    const total =
+      subtotal + shipping;
+
+
+    orderSummary.innerHTML = `
+
+      <div class="summary-item">
+
+        <div class="summary-name">
+          ${product.name}
+        </div>
+
+        <div>
+          Quantity: ${quantity}
+        </div>
+
+        <div>
+          ₹${product.price}
+        </div>
+
+      </div>
+
+      <div class="row">
+        <span>Subtotal</span>
+        <span>₹${subtotal}</span>
+      </div>
+
+      <div class="row">
+        <span>Shipping</span>
+        <span>₹${shipping}</span>
+      </div>
+
+      <div class="row total">
+        <span>Total</span>
+        <span>₹${total}</span>
+      </div>
+
+      <p>
+        India shipping only.<br>
+        Dispatch: 7–14 business days.
+      </p>
+
+    `;
+
+  }
+
+
+  document
+    .getElementById("checkoutForm")
+    .addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      const product =
+        JSON.parse(savedData);
+
+
+      const orderId =
+        "AEL-" +
+        Date.now().toString().slice(-8);
+
+
+      const quantity =
+        product.quantity || 1;
+
+      const subtotal =
+        product.price * quantity;
+
+      const shipping =
+        75;
+
+      const total =
+        subtotal + shipping;
+
+
+      const order = {
+
+        orderId: orderId,
+
+        customer: {
+
+          name:
+            document.getElementById("name").value,
+
+          mobile:
+            document.getElementById("mobile").value,
+
+          email:
+            document.getElementById("email").value,
+
+          house:
+            document.getElementById("house").value,
+
+          street:
+            document.getElementById("street").value,
+
+          city:
+            document.getElementById("city").value,
+
+          state:
+            document.getElementById("state").value,
+
+          pincode:
+            document.getElementById("pincode").value,
+
+          country:
+            "India",
+
+          notes:
+            document.getElementById("notes").value
+
+        },
+
+        product: product,
+
+        subtotal: subtotal,
+
+        shipping: shipping,
+
+        total: total,
+
+        transactionId:
+          document.getElementById("transactionId").value,
+
+        paymentStatus:
+          "Pending Verification",
+
+        orderStatus:
+          "Pending Payment",
+
+        createdAt:
+          new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+        "aeloriaPendingOrder",
+        JSON.stringify(order)
+      );
+
+
+      document.getElementById("message").innerHTML = `
+        <strong>Order details saved ♡</strong><br>
+        Order number: ${orderId}<br><br>
+        Your payment will be manually verified before
+        your order is processed.
+      `;
+
+    });
+
+</script>
+
+</body>
+</html>
