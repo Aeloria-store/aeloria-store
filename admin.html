@@ -164,10 +164,19 @@
   const ordersBox =
     document.getElementById("orders");
 
-  const savedOrder =
-    localStorage.getItem(
-      "aeloriaPendingOrder"
-    );
+  const savedOrders =
+  JSON.parse(
+    localStorage.getItem("aeloriaOrders") || "[]"
+  );
+
+const savedOrder =
+  savedOrders.length > 0
+    ? JSON.stringify(
+        savedOrders[savedOrders.length - 1]
+      )
+    : localStorage.getItem(
+        "aeloriaPendingOrder"
+      );
 
   if (!savedOrder) {
 
