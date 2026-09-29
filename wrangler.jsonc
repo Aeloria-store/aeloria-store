@@ -3,7 +3,11 @@
   "main": "worker.js",
   "compatibility_date": "2026-09-29",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
   },
   "d1_databases": [
     {
@@ -11,5 +15,5 @@
       "database_name": "aeloria-orders",
       "database_id": "73344716-c0dc-44f8-adbb-d0fdf8df568c"
     }
-  }
+  ]
 }
