@@ -551,6 +551,8 @@ function goToCheckout() {
     localStorage.getItem("aeloriaCart")
   ) || [];
 
+  localStorage.removeItem("aeloriaBuyNow");
+
   localStorage.setItem(
     "aeloriaCheckoutCart",
     JSON.stringify(cart)
