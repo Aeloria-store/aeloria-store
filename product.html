@@ -385,26 +385,38 @@
 
 
   function addToCart() {
+  const note = document.getElementById("customerNote").value;
 
-    const note = document.getElementById("customerNote").value;
+  const cartItem = {
+    id: productId,
+    name: product.name,
+    price: product.price,
+    image: product.image,
+    note: note,
+    quantity: 1
+  };
 
-    const cartItem = {
-      id: productId,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-      note: note,
-      quantity: 1
-    };
+  let cart = JSON.parse(
+    localStorage.getItem("aeloriaCart")
+  ) || [];
 
-    localStorage.setItem(
-      "aeloriaLastProduct",
-      JSON.stringify(cartItem)
-    );
+  const existingItem = cart.find(
+    item => item.id === cartItem.id
+  );
 
-    document.getElementById("message").textContent =
-      "Added to your AELORIA cart ♡";
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push(cartItem);
+  }
 
+  localStorage.setItem(
+    "aeloriaCart",
+    JSON.stringify(cart)
+  );
+
+  document.getElementById("message").textContent =
+    "Added to your AELORIA cart ♡";
   }
 function buyNow() {
 
