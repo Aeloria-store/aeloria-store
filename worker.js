@@ -54,7 +54,46 @@ export default {
         );
       }
     }
+if (
+  url.pathname === "/api/admin/orders" &&
+  request.method === "GET"
+) {
+  const auth =
+    request.headers.get("Authorization");
 
+  if (
+    auth !== `Bearer ${env.ADMIN_PASSWORD}`
+  ) {
+    return Response.json(
+      {
+        success: false,
+        error: "Unauthorized"
+      },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const result = await env.DB.prepare(`
+      SELECT *
+      FROM orders
+      ORDER BY created_at DESC
+    `).all();
+
+    return Response.json({
+      success: true,
+      orders: result.results
+    });
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+  }
+}
     return env.ASSETS.fetch(request);
   }
 };
