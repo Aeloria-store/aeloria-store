@@ -451,7 +451,7 @@ products.forEach(item => {
 
   document
     .getElementById("checkoutForm")
-    .addEventListener("submit", function(event) {
+    .addEventListener("submit", async function(event) {
 
       event.preventDefault();
 
@@ -541,25 +541,25 @@ products.forEach(item => {
       };
 
 
-      const savedOrders =
-  JSON.parse(
-    localStorage.getItem("aeloriaOrders") || "[]"
-  );
+      const response = await fetch("/api/orders", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(order)
+});
 
-savedOrders.push(order);
-
-localStorage.setItem(
-  "aeloriaOrders",
-  JSON.stringify(savedOrders)
-);
+if (!response.ok) {
+  alert("We could not save your order. Please try again.");
+  return;
+}
 
 localStorage.setItem(
   "aeloriaPendingOrder",
   JSON.stringify(order)
 );
 
-
-      window.location.href =
+window.location.href =
   "order-success.html";
 
     });
