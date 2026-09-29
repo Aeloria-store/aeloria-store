@@ -557,7 +557,7 @@ function updateOrderStatus() {
 
   if (!savedOrder) {
     return;
-<script>
+
 
   const ordersBox =
     document.getElementById("orders");
@@ -1094,7 +1094,58 @@ function updateOrderStatus() {
     location.reload();
 
   }
+async function loadOrders() {
+  const ordersBox =
+    document.getElementById("orders");
 
+  ordersBox.innerHTML = `
+    <div class="empty">
+      Loading orders...
+    </div>
+  `;
+
+  try {
+    const response =
+      await fetch("/api/admin/orders");
+
+    if (!response.ok) {
+      throw new Error("Could not load orders");
+    }
+
+    const data = await response.json();
+
+    if (!data.orders || data.orders.length === 0) {
+      ordersBox.innerHTML = `
+        <div class="empty">
+          No orders found yet.
+        </div>
+      `;
+      return;
+    }
+
+    ordersBox.innerHTML =
+      data.orders
+        .map(order => `
+          <div class="order-card">
+            <h3>${order.order_id}</h3>
+            <p><strong>Total:</strong> ₹${order.total}</p>
+            <p><strong>Payment:</strong> ${order.payment_status}</p>
+            <p><strong>Status:</strong> ${order.order_status}</p>
+            <p><strong>Created:</strong> ${order.created_at}</p>
+          </div>
+        `)
+        .join("");
+
+  } catch (error) {
+    ordersBox.innerHTML = `
+      <div class="empty">
+        Could not load orders.
+      </div>
+    `;
+  }
+}
+
+loadOrders();
 </script>
 </body>
 
