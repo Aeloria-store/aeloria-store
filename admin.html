@@ -403,6 +403,20 @@ currentCategoryId = categoryId;
 
   const size =
     document.getElementById("productSize").value.trim();
+    const fulfillment =
+  document.getElementById("productFulfillment").value;
+
+const customerNoteEnabled =
+  document.getElementById("customerNoteEnabled").checked;
+
+const isBestseller =
+  document.getElementById("productBestseller").checked;
+
+const isNewArrival =
+  document.getElementById("productNewArrival").checked;
+
+const isVisible =
+  document.getElementById("productVisible").checked;
     if (!productName || !price || !stock) {
 
   alert(
@@ -422,15 +436,19 @@ currentCategoryId = categoryId;
         "Bearer " + adminPassword
     },
 
-    body: JSON.stringify({
-      categoryId: categoryId,
-      name: productName,
-      description: description,
-      price: price,
-      salePrice: salePrice,
-      stock: stock,
-      imageUrl: imageUrl,
-      size: size
+    categoryId: categoryId,
+name: productName,
+description: description,
+price: price,
+salePrice: salePrice,
+stock: stock,
+imageUrl: imageUrl,
+size: size,
+madeToOrder: fulfillment === "made_to_order",
+customerNoteEnabled: customerNoteEnabled,
+isBestseller: isBestseller,
+isNewArrival: isNewArrival,
+isVisible: isVisible
     })
 
   });
