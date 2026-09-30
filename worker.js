@@ -3,6 +3,82 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+        if (
+      url.pathname === "/api/admin/categories" &&
+      request.method === "POST"
+    ) {
+      const auth =
+        request.headers.get("Authorization");
+
+      if (
+        auth !== `Bearer ${env.ADMIN_PASSWORD}`
+      ) {
+        return Response.json(
+          {
+            success: false,
+            error: "Unauthorized"
+          },
+          { status: 401 }
+        );
+      }
+
+      try {
+        const body =
+          await request.json();
+
+        const name =
+          body.name.trim();
+
+        if (!name) {
+          return Response.json(
+            {
+              success: false,
+              error: "Category name is required"
+            },
+            { status: 400 }
+          );
+        }
+
+        const slug =
+          name
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+        await env.DB.prepare(`
+          INSERT INTO categories (
+            name,
+            slug,
+            created_at
+          )
+          VALUES (?, ?, ?)
+        `)
+          .bind(
+            name,
+            slug,
+            new Date().toISOString()
+          )
+          .run();
+
+        return Response.json({
+          success: true,
+          message: "Category created successfully"
+        });
+
+      } catch (error) {
+
+        return Response.json(
+          {
+            success: false,
+            error: error.message
+          },
+          { status: 500 }
+        );
+
+      }
+    }
+    const url = new URL(request.url);
 
 if (
   url.pathname === "/api/admin/categories" &&
