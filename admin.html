@@ -207,7 +207,7 @@ let adminPassword = "";
   );
 
 }
-  function addCategory() {
+  async function addCategory() {
 
   const categoryName =
     prompt("Enter new category name:");
@@ -216,9 +216,50 @@ let adminPassword = "";
     return;
   }
 
-  alert(
-    "New category: " + categoryName
-  );
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/categories",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " + adminPassword
+          },
+
+          body: JSON.stringify({
+            name: categoryName
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error || "Could not create category"
+      );
+    }
+
+    alert(
+      "Category created successfully!"
+    );
+
+    loadProductCategories();
+
+  } catch (error) {
+
+    alert(
+      "Could not create category."
+    );
+
+  }
 
 }
 async function loadProductCategories() {
