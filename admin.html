@@ -251,17 +251,24 @@ currentCategoryId = categoryId;
   box.innerHTML = `
 
     <div
-      style="
-        margin-top:16px;
-        padding:20px;
-        border-radius:16px;
-        background:#FFF8E2;
-      "
-    >
+  style="
+    margin-top:16px;
+    padding:20px;
+    border-radius:16px;
+    background:#FFF8E2;
+  "
+>
 
-      <h3>
-        Add Product
-      </h3>
+  <button
+    type="button"
+    onclick="openCategory(${categoryId}, '${categoryName}')"
+  >
+    ← Back to Category
+  </button>
+
+  <h3>
+    Add Product
+  </h3>
 
       <p>
         Category:
