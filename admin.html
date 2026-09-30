@@ -207,6 +207,20 @@ let adminPassword = "";
   );
 
 }
+  function addCategory() {
+
+  const categoryName =
+    prompt("Enter new category name:");
+
+  if (!categoryName) {
+    return;
+  }
+
+  alert(
+    "New category: " + categoryName
+  );
+
+}
 async function loadProductCategories() {
 
   const box =
