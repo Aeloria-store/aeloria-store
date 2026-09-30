@@ -221,15 +221,22 @@ let adminPassword = "";
       "
     >
 
+      <button
+        type="button"
+        onclick="loadProductCategories()"
+      >
+        ← Back to Categories
+      </button>
+
       <h3>
         ${categoryName}
       </h3>
 
       <button
-  onclick="addProduct(${categoryId}, '${categoryName}')"
->
-  ＋ Add Product
-</button>
+        onclick="addProduct(${categoryId}, '${categoryName}')"
+      >
+        ＋ Add Product
+      </button>
 
     </div>
 
