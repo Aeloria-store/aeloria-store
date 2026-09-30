@@ -431,25 +431,26 @@ const isVisible =
     method: "POST",
 
     headers: {
-      "Content-Type": "application/json",
-      "Authorization":
-        "Bearer " + adminPassword
-    },
+  "Content-Type": "application/json",
+  "Authorization":
+    "Bearer " + adminPassword
+},
 
-    categoryId: categoryId,
-name: productName,
-description: description,
-price: price,
-salePrice: salePrice,
-stock: stock,
-imageUrl: imageUrl,
-size: size,
-madeToOrder: fulfillment === "made_to_order",
-customerNoteEnabled: customerNoteEnabled,
-isBestseller: isBestseller,
-isNewArrival: isNewArrival,
-isVisible: isVisible
-    })
+body: JSON.stringify({
+  categoryId: categoryId,
+  name: productName,
+  description: description,
+  price: price,
+  salePrice: salePrice,
+  stock: stock,
+  imageUrl: imageUrl,
+  size: size,
+  madeToOrder: fulfillment === "made_to_order",
+  customerNoteEnabled: customerNoteEnabled,
+  isBestseller: isBestseller,
+  isNewArrival: isNewArrival,
+  isVisible: isVisible
+})
 
   });
     const data =
