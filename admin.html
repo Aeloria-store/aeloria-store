@@ -434,6 +434,20 @@ currentCategoryId = categoryId;
     })
 
   });
+    const data =
+  await response.json();
+
+if (!response.ok || !data.success) {
+
+  throw new Error(
+    data.error || "Could not save product"
+  );
+
+}
+
+alert(
+  "Product saved successfully! ❤️"
+);
 alert(
   "Product details collected successfully!"
 );
