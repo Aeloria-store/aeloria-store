@@ -375,7 +375,31 @@ let adminPassword = "";
 }
   async function saveProduct() {
 
-  alert("Save Product clicked!");
+  const productName =
+    document.getElementById("productName").value.trim();
+
+  const description =
+    document.getElementById("productDescription").value.trim();
+
+  const price =
+    Number(document.getElementById("productPrice").value);
+
+  const salePriceValue =
+    document.getElementById("productSalePrice").value;
+
+  const salePrice =
+    salePriceValue
+      ? Number(salePriceValue)
+      : null;
+
+  const stock =
+    Number(document.getElementById("productStock").value);
+
+  const imageUrl =
+    document.getElementById("productImageUrl").value.trim();
+
+  const size =
+    document.getElementById("productSize").value.trim();
 
 }
   async function addCategory() {
