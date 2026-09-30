@@ -374,7 +374,9 @@ currentCategoryId = categoryId;
   `;
 
 }
-  async function saveProduct(categoryId) {
+  async function saveProduct() {
+
+  const categoryId = currentCategoryId;
 
   const productName =
     document.getElementById("productName").value.trim();
