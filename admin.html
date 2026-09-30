@@ -202,9 +202,31 @@
 let adminPassword = "";
   function openCategory(categoryId, categoryName) {
 
-  alert(
-    "You opened: " + categoryName
-  );
+  const box =
+    document.getElementById("productCategories");
+
+  box.innerHTML = `
+
+    <div
+      style="
+        margin-top:16px;
+        padding:20px;
+        border-radius:16px;
+        background:#FFF8E2;
+      "
+    >
+
+      <h3>
+        ${categoryName}
+      </h3>
+
+      <p>
+        Category ID: ${categoryId}
+      </p>
+
+    </div>
+
+  `;
 
 }
   async function addCategory() {
