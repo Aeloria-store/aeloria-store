@@ -233,9 +233,32 @@ let adminPassword = "";
 }
   function addProduct(categoryId, categoryName) {
 
-  alert(
-    "Adding a product to: " + categoryName
-  );
+  const box =
+    document.getElementById("productCategories");
+
+  box.innerHTML = `
+
+    <div
+      style="
+        margin-top:16px;
+        padding:20px;
+        border-radius:16px;
+        background:#FFF8E2;
+      "
+    >
+
+      <h3>
+        Add Product
+      </h3>
+
+      <p>
+        Category:
+        <strong>${categoryName}</strong>
+      </p>
+
+    </div>
+
+  `;
 
 }
   async function addCategory() {
