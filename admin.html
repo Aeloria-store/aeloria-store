@@ -161,7 +161,17 @@
 <body>
 
   <div class="container">
+<div class="card">
 
+  <h2>Products</h2>
+
+  <div id="productCategories">
+    <div class="empty">
+      Loading categories...
+    </div>
+  </div>
+
+</div>
     <div class="brand">AELORIA</div>
 
     <div class="subtitle">
@@ -186,7 +196,62 @@
 <script>
 
 let adminPassword = "";
+async function loadProductCategories() {
 
+  const box =
+    document.getElementById("productCategories");
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/categories",
+        {
+          headers: {
+            "Authorization":
+              "Bearer " + adminPassword
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error || "Could not load categories"
+      );
+    }
+
+    box.innerHTML =
+      data.categories.map(category => `
+
+        <div
+          style="
+            margin-top:12px;
+            padding:16px;
+            border-radius:16px;
+            background:#FFF8E2;
+          "
+        >
+
+          <strong>
+            ${category.name}
+          </strong>
+
+        </div>
+
+      `).join("");
+
+  } catch (error) {
+
+    box.innerHTML =
+      `<div class="empty">
+        Could not load product categories.
+      </div>`;
+
+  }
+}
 
 async function loadOrders() {
 
@@ -585,7 +650,7 @@ async function saveOrder(orderId) {
 
 
 loadOrders();
-
+loadProductCategories();
 </script>
 
 </body>
