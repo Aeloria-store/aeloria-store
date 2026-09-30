@@ -400,6 +400,14 @@ let adminPassword = "";
 
   const size =
     document.getElementById("productSize").value.trim();
+    if (!productName || !price || !stock) {
+
+  alert(
+    "Please enter Product Name, Price, and Stock."
+  );
+
+  return;
+}
 alert(
   "Product details collected successfully!"
 );
