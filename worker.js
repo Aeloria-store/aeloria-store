@@ -36,7 +36,7 @@ if (
 
   }
 }
-    const url = new URL(request.url);
+    
 if (
   url.pathname === "/api/admin/test-secret"
 ) {
