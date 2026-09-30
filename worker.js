@@ -104,6 +104,63 @@ if (
     );
   }
 }
+    if (
+  url.pathname === "/api/admin/orders" &&
+  request.method === "PATCH"
+) {
+  const auth =
+    request.headers.get("Authorization");
+
+  if (
+    auth !== `Bearer ${env.ADMIN_PASSWORD}`
+  ) {
+    return Response.json(
+      {
+        success: false,
+        error: "Unauthorized"
+      },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const body = await request.json();
+
+    await env.DB.prepare(`
+      UPDATE orders
+      SET
+        payment_status = ?,
+        order_status = ?,
+        courier = ?,
+        tracking_number = ?,
+        admin_notes = ?
+      WHERE order_id = ?
+    `)
+      .bind(
+        body.paymentStatus || "Pending Verification",
+        body.orderStatus || "Pending Payment",
+        body.courier || "",
+        body.trackingNumber || "",
+        body.adminNotes || "",
+        body.orderId
+      )
+      .run();
+
+    return Response.json({
+      success: true,
+      orderId: body.orderId
+    });
+
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+  }
+}
     return env.ASSETS.fetch(request);
   }
 };
