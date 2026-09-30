@@ -161,6 +161,69 @@ if (
     );
   }
 }
+    if (
+  url.pathname === "/api/orders" &&
+  request.method === "GET"
+) {
+  const orderId = url.searchParams.get("orderId");
+
+  if (!orderId) {
+    return Response.json(
+      {
+        success: false,
+        error: "Order ID is required"
+      },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const result = await env.DB.prepare(`
+      SELECT
+        order_id,
+        created_at,
+        customer_json,
+        products_json,
+        subtotal,
+        shipping,
+        total,
+        payment_status,
+        order_status,
+        courier,
+        tracking_number,
+        admin_notes
+      FROM orders
+      WHERE order_id = ?
+      LIMIT 1
+    `)
+      .bind(orderId)
+      .first();
+
+    if (!result) {
+      return Response.json(
+        {
+          success: false,
+          error: "Order not found"
+        },
+        { status: 404 }
+      );
+    }
+
+    return Response.json({
+      success: true,
+      order: result
+    });
+
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+  }
+}
     return env.ASSETS.fetch(request);
   }
 };
