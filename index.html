@@ -869,44 +869,74 @@
 <script>
   async function trackOrder() {
 
-    const orderNumber =
-      document
-        .getElementById("trackOrderNumber")
-        .value
-        .trim();
+  const orderNumber =
+    document
+      .getElementById("trackOrderNumber")
+      .value
+      .trim();
 
-    const result =
-      document.getElementById("trackingResult");
+  const result =
+    document.getElementById("trackingResult");
 
-    try {
-  const response = await fetch(
-    "/api/orders?orderId=" +
-    encodeURIComponent(orderNumber)
-  );
-
-  const data = await response.json();
-
-  if (!response.ok || !data.success) {
+  if (!orderNumber) {
     result.innerHTML =
-      "We couldn't find that order. Please check your order number ♡";
+      "Please enter your order number ♡";
     return;
   }
 
-  const dbOrder = data.order;
+  result.innerHTML =
+    "Checking your order...";
 
-  const order = {
-    orderId: dbOrder.order_id,
-    createdAt: dbOrder.created_at,
-    total: dbOrder.total,
-    paymentStatus: dbOrder.payment_status,
-    orderStatus: dbOrder.order_status,
-    courier: dbOrder.courier,
-    trackingNumber: dbOrder.tracking_number
-  };
+  try {
 
-    
+    const response =
+      await fetch(
+        "/api/orders?orderId=" +
+        encodeURIComponent(orderNumber)
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+
+      result.innerHTML =
+        "We couldn't find that order. Please check your order number ♡";
+
+      return;
+    }
+
+    const dbOrder =
+      data.order;
+
+    const order = {
+
+      orderId:
+        dbOrder.order_id,
+
+      createdAt:
+        dbOrder.created_at,
+
+      total:
+        dbOrder.total,
+
+      paymentStatus:
+        dbOrder.payment_status,
+
+      orderStatus:
+        dbOrder.order_status,
+
+      courier:
+        dbOrder.courier,
+
+      trackingNumber:
+        dbOrder.tracking_number
+
+    };
+
 
     result.innerHTML = `
+
       <div
         style="
           margin-top:20px;
@@ -925,6 +955,7 @@
           ${order.orderStatus || "Pending Payment"}
         </p>
 
+
         <strong>
           Payment Status
         </strong>
@@ -933,12 +964,14 @@
           ${order.paymentStatus || "Pending Verification"}
         </p>
 
+
         ${
           order.courier
             ? `
               <strong>
                 Courier
               </strong>
+
               <p>
                 ${order.courier}
               </p>
@@ -946,12 +979,14 @@
             : ""
         }
 
+
         ${
           order.trackingNumber
             ? `
               <strong>
                 Tracking Number
               </strong>
+
               <p>
                 ${order.trackingNumber}
               </p>
@@ -960,8 +995,17 @@
         }
 
       </div>
+
     `;
+
+  } catch (error) {
+
+    result.innerHTML =
+      "Something went wrong while checking your order. Please try again ♡";
+
   }
+
+}
 </script>
 
 </body>
