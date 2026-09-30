@@ -1,7 +1,15 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-
+if (
+  url.pathname === "/api/admin/test-secret"
+) {
+  return Response.json({
+    secretConfigured:
+      typeof env.ADMIN_PASSWORD === "string" &&
+      env.ADMIN_PASSWORD.length > 0
+  });
+}
     if (url.pathname === "/api/orders" && request.method === "POST") {
       try {
         const order = await request.json();
