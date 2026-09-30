@@ -118,6 +118,54 @@ if (
 
   }
 }  
+  if (
+  url.pathname === "/api/admin/products" &&
+  request.method === "GET"
+) {
+  const auth =
+    request.headers.get("Authorization");
+
+  if (
+    auth !== `Bearer ${env.ADMIN_PASSWORD}`
+  ) {
+    return Response.json(
+      {
+        success: false,
+        error: "Unauthorized"
+      },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const result = await env.DB.prepare(`
+      SELECT
+        products.*,
+        categories.name AS category_name,
+        categories.slug AS category_slug
+      FROM products
+      JOIN categories
+        ON products.category_id = categories.id
+      ORDER BY products.id ASC
+    `).all();
+
+    return Response.json({
+      success: true,
+      products: result.results
+    });
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+
+  }
+}  
 if (
   url.pathname === "/api/admin/test-secret"
 ) {
