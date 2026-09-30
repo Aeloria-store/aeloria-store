@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>AELORIA · Admin</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
@@ -21,10 +14,8 @@
     body {
       margin: 0;
       padding: 24px;
-
       background: #FFF8E2;
       color: #5E442E;
-
       font-family: Georgia, serif;
     }
 
@@ -35,11 +26,7 @@
 
     .brand {
       text-align: center;
-
-      font-family:
-        "Shadows Into Light Two",
-        cursive;
-
+      font-family: "Shadows Into Light Two", cursive;
       font-size: 42px;
       margin-bottom: 8px;
     }
@@ -52,15 +39,10 @@
 
     .card {
       background: white;
-
       padding: 24px;
       margin-bottom: 20px;
-
       border-radius: 22px;
-
-      box-shadow:
-        0 12px 35px
-        rgba(94, 68, 46, 0.10);
+      box-shadow: 0 12px 35px rgba(94,68,46,0.10);
     }
 
     h2 {
@@ -74,9 +56,7 @@
     }
 
     .order {
-      border: 1px solid
-        rgba(94, 68, 46, 0.12);
-
+      border: 1px solid rgba(94,68,46,0.12);
       border-radius: 18px;
       padding: 18px;
       margin-top: 16px;
@@ -89,26 +69,22 @@
 
     .status {
       display: inline-block;
-
       margin-top: 8px;
+      margin-right: 6px;
       padding: 7px 11px;
-
       border-radius: 10px;
-
       background: #FFEFB9;
     }
 
     .product {
       margin-top: 14px;
       padding: 12px;
-
       background: #FFF8E2;
       border-radius: 12px;
     }
 
     .total {
       margin-top: 14px;
-
       font-size: 18px;
       font-weight: bold;
     }
@@ -116,27 +92,77 @@
     .note {
       margin-top: 12px;
       padding: 12px;
-
       background: #F7BCB0;
       border-radius: 12px;
     }
 
+    .admin-section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(94,68,46,0.12);
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid rgba(94,68,46,0.2);
+      border-radius: 12px;
+      background: #fffdf5;
+      color: #5E442E;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 16px;
+      width: 100%;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 14px;
+      background: #C85555;
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .save-message {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
   </style>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap"
     rel="stylesheet"
   >
-
 </head>
 
 <body>
 
   <div class="container">
 
-    <div class="brand">
-      AELORIA
-    </div>
+    <div class="brand">AELORIA</div>
 
     <div class="subtitle">
       Handmade Shop · Admin
@@ -144,50 +170,52 @@
 
     <div class="card">
 
-      <h2>
-        Orders
-      </h2>
+      <h2>Orders</h2>
 
       <div id="orders">
-
         <div class="empty">
-          No orders found yet.
+          Loading orders...
         </div>
-
       </div>
 
     </div>
 
   </div>
 
+
 <script>
+
+let adminPassword = "";
+
+
 async function loadOrders() {
 
   const ordersBox =
     document.getElementById("orders");
 
-  ordersBox.innerHTML = `
-    <div class="empty">
-      Loading orders...
-    </div>
-  `;
+  ordersBox.innerHTML =
+    `<div class="empty">Loading orders...</div>`;
 
-  const password =
+  adminPassword =
     prompt("Enter AELORIA Admin Password:");
 
-  if (!password) {
+  if (!adminPassword) {
+    ordersBox.innerHTML =
+      `<div class="empty">Admin password required.</div>`;
     return;
   }
 
   try {
 
-    const response =
-      await fetch("/api/admin/orders", {
+    const response = await fetch(
+      "/api/admin/orders",
+      {
         headers: {
           "Authorization":
-            "Bearer " + password
+            "Bearer " + adminPassword
         }
-      });
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Unauthorized");
@@ -200,13 +228,15 @@ async function loadOrders() {
       !data.orders ||
       data.orders.length === 0
     ) {
-      ordersBox.innerHTML = `
-        <div class="empty">
+
+      ordersBox.innerHTML =
+        `<div class="empty">
           No orders found yet.
-        </div>
-      `;
+        </div>`;
+
       return;
     }
+
 
     ordersBox.innerHTML =
       data.orders.map(order => {
@@ -217,12 +247,15 @@ async function loadOrders() {
         const products =
           JSON.parse(order.products_json);
 
+
         return `
+
           <div class="order">
 
             <div class="order-id">
               ${order.order_id}
             </div>
+
 
             <div class="status">
               Payment:
@@ -231,6 +264,7 @@ async function loadOrders() {
               </strong>
             </div>
 
+
             <div class="status">
               Order:
               <strong>
@@ -238,53 +272,321 @@ async function loadOrders() {
               </strong>
             </div>
 
+
             <p>
               <strong>Customer:</strong>
               ${customer.name}
             </p>
+
 
             <p>
               <strong>Mobile:</strong>
               ${customer.mobile}
             </p>
 
+
             <p>
               <strong>Email:</strong>
               ${customer.email}
             </p>
+
 
             <p>
               <strong>Total:</strong>
               ₹${order.total}
             </p>
 
-            <p>
+
+            <div class="product">
+
               <strong>Products:</strong>
-              ${products.map(item =>
-                `${item.name} × ${item.quantity || 1}`
-              ).join("<br>")}
-            </p>
+
+              <br><br>
+
+              ${
+                products
+                  .map(
+                    item =>
+                      `${item.name} × ${item.quantity || 1}`
+                  )
+                  .join("<br>")
+              }
+
+            </div>
+
+
+            <div class="admin-section">
+
+              <h3>
+                Manage Order
+              </h3>
+
+
+              <label>
+                Payment Status
+              </label>
+
+              <select
+                id="payment-${order.order_id}"
+              >
+
+                <option
+                  value="Pending Verification"
+                  ${order.payment_status === "Pending Verification" ? "selected" : ""}
+                >
+                  Pending Verification
+                </option>
+
+                <option
+                  value="Payment Verified"
+                  ${order.payment_status === "Payment Verified" ? "selected" : ""}
+                >
+                  Payment Verified
+                </option>
+
+                <option
+                  value="Payment Failed"
+                  ${order.payment_status === "Payment Failed" ? "selected" : ""}
+                >
+                  Payment Failed
+                </option>
+
+              </select>
+
+
+              <label>
+                Order Status
+              </label>
+
+              <select
+                id="status-${order.order_id}"
+              >
+
+                <option
+                  value="Pending Payment"
+                  ${order.order_status === "Pending Payment" ? "selected" : ""}
+                >
+                  Pending Payment
+                </option>
+
+                <option
+                  value="Processing"
+                  ${order.order_status === "Processing" ? "selected" : ""}
+                >
+                  Processing
+                </option>
+
+                <option
+                  value="Shipped"
+                  ${order.order_status === "Shipped" ? "selected" : ""}
+                >
+                  Shipped
+                </option>
+
+                <option
+                  value="Delivered"
+                  ${order.order_status === "Delivered" ? "selected" : ""}
+                >
+                  Delivered
+                </option>
+
+                <option
+                  value="Cancelled"
+                  ${order.order_status === "Cancelled" ? "selected" : ""}
+                >
+                  Cancelled
+                </option>
+
+              </select>
+
+
+              <label>
+                Courier
+              </label>
+
+              <input
+                id="courier-${order.order_id}"
+                value="${order.courier || ""}"
+                placeholder="India Post / DTDC"
+              >
+
+
+              <label>
+                Tracking Number
+              </label>
+
+              <input
+                id="tracking-${order.order_id}"
+                value="${order.tracking_number || ""}"
+                placeholder="Enter tracking number"
+              >
+
+
+              <label>
+                Admin Notes
+              </label>
+
+              <textarea
+                id="notes-${order.order_id}"
+                placeholder="Private admin notes..."
+              >${order.admin_notes || ""}</textarea>
+
+
+              <button
+                onclick="saveOrder('${order.order_id}')"
+              >
+                Save Changes
+              </button>
+
+
+              <div
+                id="message-${order.order_id}"
+                class="save-message"
+              ></div>
+
+            </div>
 
           </div>
+
         `;
 
       }).join("");
+
 
   } catch (error) {
 
     ordersBox.innerHTML = `
       <div class="empty">
+
         Could not load orders.
+
         <br><br>
+
         Please check your Admin password.
+
       </div>
     `;
 
   }
+
 }
 
-loadOrders();
-</script>
-</body>
 
+async function saveOrder(orderId) {
+
+  const message =
+    document.getElementById(
+      "message-" + orderId
+    );
+
+
+  const paymentStatus =
+    document.getElementById(
+      "payment-" + orderId
+    ).value;
+
+
+  const orderStatus =
+    document.getElementById(
+      "status-" + orderId
+    ).value;
+
+
+  const courier =
+    document.getElementById(
+      "courier-" + orderId
+    ).value;
+
+
+  const trackingNumber =
+    document.getElementById(
+      "tracking-" + orderId
+    ).value;
+
+
+  const adminNotes =
+    document.getElementById(
+      "notes-" + orderId
+    ).value;
+
+
+  message.textContent =
+    "Saving...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/orders",
+        {
+          method: "PATCH",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " + adminPassword
+          },
+
+          body: JSON.stringify({
+
+            orderId,
+
+            paymentStatus,
+
+            orderStatus,
+
+            courier,
+
+            trackingNumber,
+
+            adminNotes
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error || "Update failed"
+      );
+
+    }
+
+
+    message.textContent =
+      "✓ Saved successfully";
+
+
+    setTimeout(() => {
+
+      message.textContent = "";
+
+    }, 2500);
+
+
+  } catch (error) {
+
+    message.textContent =
+      "Could not save changes.";
+
+  }
+
+}
+
+
+loadOrders();
+
+</script>
+
+</body>
 </html>
