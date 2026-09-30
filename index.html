@@ -867,7 +867,7 @@
 
   </footer>
 <script>
-  function trackOrder() {
+  async function trackOrder() {
 
     const orderNumber =
       document
@@ -878,29 +878,33 @@
     const result =
       document.getElementById("trackingResult");
 
-    const savedOrder =
-      localStorage.getItem("aeloriaPendingOrder");
+    try {
+  const response = await fetch(
+    "/api/orders?orderId=" +
+    encodeURIComponent(orderNumber)
+  );
 
-    if (!orderNumber) {
-      result.innerHTML =
-        "Please enter your order number ♡";
-      return;
-    }
+  const data = await response.json();
 
-    if (!savedOrder) {
-      result.innerHTML =
-        "We couldn't find that order. Please check your order number ♡";
-      return;
-    }
+  if (!response.ok || !data.success) {
+    result.innerHTML =
+      "We couldn't find that order. Please check your order number ♡";
+    return;
+  }
 
-    const order =
-      JSON.parse(savedOrder);
+  const dbOrder = data.order;
 
-    if (order.orderId !== orderNumber) {
-      result.innerHTML =
-        "We couldn't find that order. Please check your order number ♡";
-      return;
-    }
+  const order = {
+    orderId: dbOrder.order_id,
+    createdAt: dbOrder.created_at,
+    total: dbOrder.total,
+    paymentStatus: dbOrder.payment_status,
+    orderStatus: dbOrder.order_status,
+    courier: dbOrder.courier,
+    trackingNumber: dbOrder.tracking_number
+  };
+
+    
 
     result.innerHTML = `
       <div
