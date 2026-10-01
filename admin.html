@@ -228,9 +228,15 @@ let adminPassword = "";
         ← Back to Categories
       </button>
 
-      <h3>
+            <h3>
         ${categoryName}
       </h3>
+
+      <div id="categoryProducts">
+        <div class="empty">
+          Loading products...
+        </div>
+      </div>
 
       <button
         onclick="addProduct(${categoryId}, '${categoryName}')"
