@@ -930,9 +930,53 @@ loadProductCategories();
     return;
   }
 
-  alert(
-    "Delete function is ready. Backend will be connected next."
-  );
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/products",
+        {
+          method: "DELETE",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " + adminPassword
+          },
+
+          body:
+            JSON.stringify({
+              id: productId
+            })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error ||
+        "Could not delete product"
+      );
+    }
+
+    alert(
+      "Product deleted successfully!"
+    );
+
+    loadProductCategories();
+
+  } catch (error) {
+
+    alert(
+      "Could not delete product: " +
+      error.message
+    );
+
+  }
 
 }
   async function saveProduct() {
