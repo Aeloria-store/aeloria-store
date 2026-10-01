@@ -892,7 +892,13 @@ newArrivalsGrid.innerHTML = "";
 
         `;
 
-        productGrid.appendChild(card);
+        if (product.is_bestseller) {
+  productGrid.appendChild(card);
+}
+
+if (product.is_new_arrival) {
+  newArrivalsGrid.appendChild(card);
+};
 
       });
 
