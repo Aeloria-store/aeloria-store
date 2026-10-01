@@ -498,6 +498,89 @@ ${product.stock}
   }
 
 }
+  async function editProduct(productId) {
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/products",
+        {
+          headers: {
+            "Authorization":
+              "Bearer " + adminPassword
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error || "Could not load product"
+      );
+    }
+
+    const product =
+      data.products.find(
+        item =>
+          Number(item.id) === Number(productId)
+      );
+
+    if (!product) {
+      alert("Product not found.");
+      return;
+    }
+
+    const box =
+      document.getElementById("productCategories");
+
+    box.innerHTML = `
+
+      <div
+        style="
+          margin-top:16px;
+          padding:20px;
+          border-radius:16px;
+          background:#FFF8E2;
+        "
+      >
+
+        <button
+          type="button"
+          onclick="openCategory(${product.category_id}, '${product.category_name}')"
+        >
+          ← Back to Category
+        </button>
+
+        <h3>
+          Edit Product
+        </h3>
+
+        <p>
+          Product:
+          <strong>${product.name}</strong>
+        </p>
+
+        <p>
+          This is the edit screen.
+        </p>
+
+      </div>
+
+    `;
+
+  } catch (error) {
+
+    alert(
+      "Could not load product: " +
+      error.message
+    );
+
+  }
+
+}
   async function saveProduct() {
 
   const categoryId = currentCategoryId;
