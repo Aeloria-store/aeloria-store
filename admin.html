@@ -767,6 +767,150 @@ ${product.stock}
   }
 
 }
+  async function saveEditedProduct(productId) {
+
+  try {
+
+    const product = {
+
+      id: productId,
+
+      name:
+        document
+          .getElementById("editProductName")
+          .value
+          .trim(),
+
+      description:
+        document
+          .getElementById("editProductDescription")
+          .value
+          .trim(),
+
+      price:
+        Number(
+          document
+            .getElementById("editProductPrice")
+            .value
+        ),
+
+      salePrice:
+        document
+          .getElementById("editProductSalePrice")
+          .value
+          ? Number(
+              document
+                .getElementById("editProductSalePrice")
+                .value
+            )
+          : null,
+
+      stock:
+        Number(
+          document
+            .getElementById("editProductStock")
+            .value
+        ),
+
+      imageUrl:
+        document
+          .getElementById("editProductImage")
+          .value
+          .trim(),
+
+      size:
+        document
+          .getElementById("editProductSize")
+          .value
+          .trim(),
+
+      madeToOrder:
+        document
+          .getElementById("editMadeToOrder")
+          .checked,
+
+      customerNoteEnabled:
+        document
+          .getElementById("editCustomerNote")
+          .checked,
+
+      isBestseller:
+        document
+          .getElementById("editBestseller")
+          .checked,
+
+      isNewArrival:
+        document
+          .getElementById("editNewArrival")
+          .checked,
+
+      isVisible:
+        document
+          .getElementById("editVisible")
+          .checked
+
+    };
+
+    if (!product.name) {
+      alert("Product name is required.");
+      return;
+    }
+
+    if (product.price < 0) {
+      alert("Price cannot be negative.");
+      return;
+    }
+
+    if (product.stock < 0) {
+      alert("Stock cannot be negative.");
+      return;
+    }
+
+    const response =
+      await fetch(
+        "/api/admin/products",
+        {
+          method: "PATCH",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " + adminPassword
+          },
+
+          body:
+            JSON.stringify(product)
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error ||
+        "Could not update product"
+      );
+    }
+
+    alert(
+  "Product updated successfully!"
+);
+
+loadProductCategories();
+
+  } catch (error) {
+
+    alert(
+      "Could not save product: " +
+      error.message
+    );
+
+  }
+
+}
   async function saveProduct() {
 
   const categoryId = currentCategoryId;
