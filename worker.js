@@ -79,7 +79,86 @@ export default {
       }
     }
     
+if (
+  url.pathname === "/api/admin/products" &&
+  request.method === "PATCH"
+) {
+  const auth =
+    request.headers.get("Authorization");
 
+  if (
+    auth !== `Bearer ${env.ADMIN_PASSWORD}`
+  ) {
+    return Response.json(
+      {
+        success: false,
+        error: "Unauthorized"
+      },
+      { status: 401 }
+    );
+  }
+
+  try {
+
+    const product =
+      await request.json();
+
+    const now =
+      new Date().toISOString();
+
+    await env.DB.prepare(`
+      UPDATE products
+      SET
+        name = ?,
+        description = ?,
+        price = ?,
+        sale_price = ?,
+        stock = ?,
+        image_url = ?,
+        size = ?,
+        made_to_order = ?,
+        customer_note_enabled = ?,
+        is_bestseller = ?,
+        is_new_arrival = ?,
+        is_visible = ?,
+        updated_at = ?
+      WHERE id = ?
+    `)
+      .bind(
+        product.name,
+        product.description || "",
+        product.price,
+        product.salePrice || null,
+        product.stock || 0,
+        product.imageUrl || "",
+        product.size || "",
+        product.madeToOrder ? 1 : 0,
+        product.customerNoteEnabled ? 1 : 0,
+        product.isBestseller ? 1 : 0,
+        product.isNewArrival ? 1 : 0,
+        product.isVisible ? 1 : 0,
+        now,
+        product.id
+      )
+      .run();
+
+    return Response.json({
+      success: true,
+      message: "Product updated successfully"
+    });
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+
+  }
+}
 if (
   url.pathname === "/api/admin/categories" &&
   request.method === "GET"
