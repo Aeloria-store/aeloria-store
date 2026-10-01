@@ -558,14 +558,24 @@ ${product.stock}
           Edit Product
         </h3>
 
-        <p>
-          Product:
-          <strong>${product.name}</strong>
-        </p>
+        <label>
+  Product Name
+</label>
 
-        <p>
-          This is the edit screen.
-        </p>
+<input
+  type="text"
+  id="editProductName"
+  value="${product.name}"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
 
       </div>
 
