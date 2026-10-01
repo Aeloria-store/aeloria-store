@@ -246,7 +246,9 @@ let adminPassword = "";
 
     </div>
 
-  `;
+    `;
+
+  loadCategoryProducts(categoryId);
 
 }
   function addProduct(categoryId, categoryName) {
@@ -395,9 +397,7 @@ currentCategoryId = categoryId;
 </button>
         </div>
 
-  `;
-
-  loadCategoryProducts(categoryId);
+    `;
 
 }
   async function loadCategoryProducts(categoryId) {
