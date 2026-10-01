@@ -392,6 +392,95 @@ currentCategoryId = categoryId;
   `;
 
 }
+  async function loadCategoryProducts(categoryId) {
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/admin/products",
+        {
+          headers: {
+            "Authorization":
+              "Bearer " + adminPassword
+          }
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error || "Could not load products"
+      );
+    }
+
+    const categoryProducts =
+      data.products.filter(
+        product =>
+          product.category_id === categoryId
+      );
+
+    const box =
+      document.getElementById("categoryProducts");
+
+    if (
+      !categoryProducts ||
+      categoryProducts.length === 0
+    ) {
+
+      box.innerHTML =
+        `<div class="empty">
+          No products in this category yet.
+        </div>`;
+
+      return;
+    }
+
+    box.innerHTML =
+      categoryProducts.map(product => `
+
+        <div
+          style="
+            margin-top:12px;
+            padding:16px;
+            border-radius:16px;
+            background:white;
+          "
+        >
+
+          <strong>
+            ${product.name}
+          </strong>
+
+          <br>
+
+          Price:
+          ₹${product.sale_price || product.price}
+
+          <br>
+
+          Stock:
+          ${product.stock}
+
+        </div>
+
+      `).join("");
+
+  } catch (error) {
+
+    const box =
+      document.getElementById("categoryProducts");
+
+    box.innerHTML =
+      `<div class="empty">
+        Could not load category products.
+      </div>`;
+
+  }
+
+}
   async function saveProduct() {
 
   const categoryId = currentCategoryId;
