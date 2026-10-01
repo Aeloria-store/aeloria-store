@@ -19,7 +19,6 @@ export default {
         JOIN categories
           ON products.category_id = categories.id
         WHERE products.is_visible = 1
-  AND products.is_bestseller = 1
 ORDER BY products.id ASC
       `).all();
 
