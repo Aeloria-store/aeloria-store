@@ -480,7 +480,15 @@ ${product.stock}
 >
   ✏️ Edit
 </button>
-
+<button
+  type="button"
+  onclick="deleteProduct(${product.id})"
+  style="
+    margin-left:8px;
+  "
+>
+  🗑️ Delete
+</button>
         </div>
 
       `).join("");
