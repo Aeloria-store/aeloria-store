@@ -867,6 +867,87 @@
 
   </footer>
 <script>
+  
+
+  async function loadStoreProducts() {
+
+    try {
+
+      const response =
+        await fetch("/api/products");
+
+      const data =
+        await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error("Could not load products");
+      }
+
+      const productGrid =
+        document.getElementById("productGrid");
+
+      productGrid.innerHTML = "";
+
+      data.products.forEach(product => {
+
+        const card =
+          document.createElement("article");
+
+        card.className =
+          "product-card";
+
+        card.innerHTML = `
+
+          <div class="product-image">
+            ${product.image_url
+              ? `<img
+                   src="${product.image_url}"
+                   alt="${product.name}"
+                   style="
+                     width:100%;
+                     height:100%;
+                     object-fit:cover;
+                     border-radius:16px;
+                   "
+                 >`
+              : "🌷"
+            }
+          </div>
+
+          <h3>
+            ${product.name}
+          </h3>
+
+          <div class="price">
+            ₹${product.sale_price || product.price}
+          </div>
+
+          <a
+            href="product.html?product=${product.id}"
+            class="button"
+          >
+            View Product
+          </a>
+
+        `;
+
+        productGrid.appendChild(card);
+
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Could not load store products:",
+        error
+      );
+
+    }
+
+  }
+
+
+  async function trackOrder() {
   async function trackOrder() {
 
   const orderNumber =
