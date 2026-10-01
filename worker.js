@@ -78,7 +78,64 @@ export default {
 
       }
     }
-    
+    if (
+  url.pathname === "/api/admin/products" &&
+  request.method === "DELETE"
+) {
+  const auth =
+    request.headers.get("Authorization");
+
+  if (
+    auth !== `Bearer ${env.ADMIN_PASSWORD}`
+  ) {
+    return Response.json(
+      {
+        success: false,
+        error: "Unauthorized"
+      },
+      { status: 401 }
+    );
+  }
+
+  try {
+
+    const body =
+      await request.json();
+
+    if (!body.id) {
+      return Response.json(
+        {
+          success: false,
+          error: "Product ID is required"
+        },
+        { status: 400 }
+      );
+    }
+
+    await env.DB.prepare(`
+      DELETE FROM products
+      WHERE id = ?
+    `)
+      .bind(body.id)
+      .run();
+
+    return Response.json({
+      success: true,
+      message: "Product deleted successfully"
+    });
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+
+  }
+}
 if (
   url.pathname === "/api/admin/products" &&
   request.method === "PATCH"
