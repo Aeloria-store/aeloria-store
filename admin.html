@@ -459,18 +459,27 @@ currentCategoryId = categoryId;
         >
 
           <strong>
-            ${product.name}
-          </strong>
+  ${product.name}
+</strong>
 
-          <br>
+<br>
 
-          Price:
-          ₹${product.sale_price || product.price}
+Price:
+₹${product.sale_price || product.price}
 
-          <br>
+<br>
 
-          Stock:
-          ${product.stock}
+Stock:
+${product.stock}
+
+<br><br>
+
+<button
+  type="button"
+  onclick="editProduct(${product.id})"
+>
+  ✏️ Edit
+</button>
 
         </div>
 
