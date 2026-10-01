@@ -593,6 +593,150 @@ ${product.stock}
     box-sizing:border-box;
   "
 >${product.description || ""}</textarea>
+<label>
+  Price (₹)
+</label>
+
+<input
+  type="number"
+  id="editProductPrice"
+  value="${product.price}"
+  min="0"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
+
+<label>
+  Sale Price (₹)
+</label>
+
+<input
+  type="number"
+  id="editProductSalePrice"
+  value="${product.sale_price || ""}"
+  min="0"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
+
+<label>
+  Stock
+</label>
+
+<input
+  type="number"
+  id="editProductStock"
+  value="${product.stock}"
+  min="0"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
+
+<label>
+  Image URL
+</label>
+
+<input
+  type="text"
+  id="editProductImage"
+  value="${product.image_url || ""}"
+  placeholder="Paste image URL here"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
+
+<label>
+  Size
+</label>
+
+<input
+  type="text"
+  id="editProductSize"
+  value="${product.size || ""}"
+  placeholder="Example: 5 cm"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>
+
+<label style="display:block; margin-bottom:12px;">
+  <input
+    type="checkbox"
+    id="editMadeToOrder"
+    ${product.made_to_order ? "checked" : ""}
+  >
+  Made to Order
+</label>
+
+<label style="display:block; margin-bottom:12px;">
+  <input
+    type="checkbox"
+    id="editCustomerNote"
+    ${product.customer_note_enabled ? "checked" : ""}
+  >
+  Allow Customer Note
+</label>
+
+<label style="display:block; margin-bottom:12px;">
+  <input
+    type="checkbox"
+    id="editBestseller"
+    ${product.is_bestseller ? "checked" : ""}
+  >
+  Best Seller
+</label>
+
+<label style="display:block; margin-bottom:12px;">
+  <input
+    type="checkbox"
+    id="editNewArrival"
+    ${product.is_new_arrival ? "checked" : ""}
+  >
+  New Arrival
+</label>
+
+<label style="display:block; margin-bottom:20px;">
+  <input
+    type="checkbox"
+    id="editVisible"
+    ${product.is_visible ? "checked" : ""}
+  >
+  Visible on Store
+</label>
       </div>
 
     `;
