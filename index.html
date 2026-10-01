@@ -885,7 +885,9 @@
 
       const productGrid =
         document.getElementById("productGrid");
-
+      
+console.log("LIVE PRODUCTS LOADED:", data.products);
+      
       productGrid.innerHTML = "";
 
       data.products.forEach(product => {
