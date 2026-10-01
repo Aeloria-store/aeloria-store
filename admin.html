@@ -576,7 +576,23 @@ ${product.stock}
     box-sizing:border-box;
   "
 >
+<label>
+  Description
+</label>
 
+<textarea
+  id="editProductDescription"
+  style="
+    width:100%;
+    min-height:100px;
+    padding:12px;
+    margin-top:6px;
+    margin-bottom:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-sizing:border-box;
+  "
+>${product.description || ""}</textarea>
       </div>
 
     `;
