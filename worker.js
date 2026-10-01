@@ -3,6 +3,42 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (
+  url.pathname === "/api/products" &&
+  request.method === "GET"
+) {
+  try {
+
+    const result =
+      await env.DB.prepare(`
+        SELECT
+          products.*,
+          categories.name AS category_name,
+          categories.slug AS category_slug
+        FROM products
+        JOIN categories
+          ON products.category_id = categories.id
+        WHERE products.is_visible = 1
+        ORDER BY products.id ASC
+      `).all();
+
+    return Response.json({
+      success: true,
+      products: result.results
+    });
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+
+  }
+}
         if (
       url.pathname === "/api/admin/categories" &&
       request.method === "POST"
