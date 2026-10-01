@@ -893,12 +893,12 @@ newArrivalsGrid.innerHTML = "";
         `;
 
         if (product.is_bestseller) {
-  productGrid.appendChild(card);
+  productGrid.appendChild(card.cloneNode(true));
 }
 
 if (product.is_new_arrival) {
   newArrivalsGrid.appendChild(card);
-};
+}
 
       });
 
