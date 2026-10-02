@@ -320,135 +320,7 @@
 
 
   <div class="product-grid" id="productGrid">
-
-
-    <!-- CAT PETAL -->
-
-    <div
-      class="product-card"
-      data-name="Cat Petal Crochet Charm"
-      data-category="Crochet Characters"
-      data-stock="10"
-    >
-
-      <a
-        class="product-link"
-        href="product.html?product=cat-petal"
-      >
-
-        <div class="product-image">
-          🐈‍⬛🌷
-        </div>
-
-        <div class="product-category">
-          Crochet Characters
-        </div>
-
-        <div class="product-name">
-          Cat Petal Crochet Charm
-        </div>
-
-        <div class="product-price">
-          ₹179
-        </div>
-
-      </a>
-
-      <a
-        class="shop-button"
-        href="product.html?product=cat-petal"
-      >
-        View Product ♡
-      </a>
-
-    </div>
-
-
-    <!-- WIZARD CAT -->
-
-    <div
-      class="product-card"
-      data-name="Wizard Cat Crochet Charm"
-      data-category="Crochet Characters"
-      data-stock="10"
-    >
-
-      <a
-        class="product-link"
-        href="product.html?product=wizard-cat"
-      >
-
-        <div class="product-image">
-          🐈‍⬛🪄
-        </div>
-
-        <div class="product-category">
-          Crochet Characters
-        </div>
-
-        <div class="product-name">
-          Wizard Cat Crochet Charm
-        </div>
-
-        <div class="product-price">
-          ₹199
-        </div>
-
-      </a>
-
-      <a
-        class="shop-button"
-        href="product.html?product=wizard-cat"
-      >
-        View Product ♡
-      </a>
-
-    </div>
-
-
-    <!-- ROSIE BUNNY -->
-
-    <div
-      class="product-card"
-      data-name="Rosie Bunny"
-      data-category="Crochet Characters"
-      data-stock="10"
-    >
-
-      <a
-        class="product-link"
-        href="product.html?product=rosie-bunny"
-      >
-
-        <div class="product-image">
-          🐰🌸
-        </div>
-
-        <div class="product-category">
-          Crochet Characters
-        </div>
-
-        <div class="product-name">
-          Rosie Bunny
-        </div>
-
-        <div class="product-price">
-          ₹199
-        </div>
-
-      </a>
-
-      <a
-        class="shop-button"
-        href="product.html?product=rosie-bunny"
-      >
-        View Product ♡
-      </a>
-
-    </div>
-
-
-  </div>
+</div>
 
 
   <div class="empty" id="empty">
@@ -470,8 +342,141 @@
 
 </footer>
 
-
 <script>
+
+let allProducts = [];
+
+async function loadShopProducts() {
+
+  try {
+
+    const response =
+      await fetch("/api/products");
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      throw new Error("Failed to load products");
+    }
+
+    allProducts =
+      data.products;
+
+    renderProducts(allProducts);
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load shop products:",
+      error
+    );
+
+    document.getElementById("empty").style.display =
+      "block";
+
+  }
+
+}
+
+
+function renderProducts(products) {
+
+  const productGrid =
+    document.getElementById("productGrid");
+
+  const empty =
+    document.getElementById("empty");
+
+  productGrid.innerHTML = "";
+
+  if (products.length === 0) {
+
+    empty.style.display = "block";
+    return;
+
+  }
+
+  empty.style.display = "none";
+
+
+  products.forEach(product => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "product-card";
+
+    card.dataset.name =
+      product.name;
+
+    card.dataset.category =
+      product.category_name;
+
+    card.dataset.stock =
+      product.stock;
+
+
+    const price =
+      product.sale_price || product.price;
+
+
+    card.innerHTML = `
+
+      <a
+        class="product-link"
+        href="product.html?product=${product.id}"
+      >
+
+        <div class="product-image">
+
+          ${
+            product.image_url
+              ? `<img
+                   src="${product.image_url}"
+                   alt="${product.name}"
+                   style="
+                     width:100%;
+                     height:100%;
+                     object-fit:cover;
+                     border-radius:17px;
+                   "
+                 >`
+              : "🌷"
+          }
+
+        </div>
+
+        <div class="product-category">
+          ${product.category_name}
+        </div>
+
+        <div class="product-name">
+          ${product.name}
+        </div>
+
+        <div class="product-price">
+          ₹${price}
+        </div>
+
+      </a>
+
+      <a
+        class="shop-button"
+        href="product.html?product=${product.id}"
+      >
+        View Product ♡
+      </a>
+
+    `;
+
+    productGrid.appendChild(card);
+
+  });
+
+}
+
 
 function filterProducts() {
 
@@ -492,63 +497,50 @@ function filterProducts() {
       .value;
 
 
-  const cards =
-    document.querySelectorAll(".product-card");
+  const filteredProducts =
+    allProducts.filter(product => {
+
+      const matchesSearch =
+        product.name
+          .toLowerCase()
+          .includes(search);
 
 
-  let visibleCount = 0;
+      const matchesCategory =
+        category === "all" ||
+        product.category_name === category;
 
 
-  cards.forEach(function(card) {
-
-    const name =
-      card.dataset.name.toLowerCase();
-
-    const cardCategory =
-      card.dataset.category;
-
-    const stock =
-      Number(card.dataset.stock);
-
-
-    const matchesSearch =
-      name.includes(search);
-
-    const matchesCategory =
-      category === "all" ||
-      cardCategory === category;
-
-    const matchesAvailability =
-      availability === "all" ||
-      (availability === "available" && stock > 0) ||
-      (availability === "unavailable" && stock <= 0);
+      const matchesAvailability =
+        availability === "all" ||
+        (
+          availability === "available" &&
+          product.stock > 0
+        ) ||
+        (
+          availability === "unavailable" &&
+          product.stock <= 0
+        );
 
 
-    if (
-      matchesSearch &&
-      matchesCategory &&
-      matchesAvailability
-    ) {
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesAvailability
+      );
 
-      card.style.display = "";
-
-      visibleCount++;
-
-    } else {
-
-      card.style.display = "none";
-
-    }
-
-  });
+    });
 
 
-  document.getElementById("empty").style.display =
-    visibleCount === 0 ? "block" : "none";
+  renderProducts(filteredProducts);
 
 }
 
+
+loadShopProducts();
+
 </script>
+
 
 </body>
 </html>
