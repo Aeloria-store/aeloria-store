@@ -658,10 +658,11 @@ if (products.length === 0) {
       subtotal + shipping;
 
     const upiUrl =
-      `upi://pay?pa=9028944267@ybl` +
-      `&pn=${encodeURIComponent("Jyoti Kailas Jadhav")}` +
-      `&am=${total.toFixed(2)}` +
-      `&cu=INR`;
+  `intent://pay?pa=9028944267@ybl` +
+  `&pn=${encodeURIComponent("Jyoti Kailas Jadhav")}` +
+  `&am=${total.toFixed(2)}` +
+  `&cu=INR` +
+  `#Intent;scheme=upi;action=android.intent.action.VIEW;end`;
 
     window.location.href = upiUrl;
 
