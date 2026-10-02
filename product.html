@@ -315,73 +315,76 @@
 
 <script>
 
-  const products = {
-
-    "cat-petal": {
-      name: "Cat Petal Crochet Charm",
-      price: 179,
-      category: "Crochet Characters",
-      image: "🐈‍⬛🌷",
-      description:
-        "A Black cat with a flower tucked over one ear. Mini Plushie Charm with Keyring.",
-      size: "5 cm",
-      stock: 10
-    },
-
-    "wizard-cat": {
-      name: "Wizard Cat Crochet Charm",
-      price: 199,
-      category: "Crochet Characters",
-      image: "🐈‍⬛🪄",
-      description:
-        "A grey cat with wand, hat & cape. Mini plushie Charm with Keyring.",
-      size: "5 cm",
-      stock: 10
-    },
-
-    "rosie-bunny": {
-      name: "Rosie Bunny",
-      price: 199,
-      category: "Crochet Characters",
-      image: "🐰🌸",
-      description:
-        "A white bunny with pink hat & dress. Mini plushie Charm with Keyring.",
-      size: "5 cm",
-      stock: 10
-    }
-
-  };
+  let product = null;
 
 
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("product") || "cat-petal";
 
-  const product = products[productId];
+  
+async function loadProduct() {
 
+  try {
 
-  if (product) {
+    const response =
+      await fetch("/api/products");
 
-    document.getElementById("productImage").textContent = product.image;
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      throw new Error("Failed to load products");
+    }
+
+    product =
+      data.products.find(
+        item => String(item.id) === String(productId)
+      );
+
+    if (!product) {
+      document.getElementById("productName").textContent =
+        "Product not found.";
+      return;
+    }
+
+    document.getElementById("productImage").textContent =
+      product.image_url || "🌷";
 
     document.getElementById("productCategory").textContent =
-      product.category;
+      product.category_name;
 
     document.getElementById("productName").textContent =
       product.name;
 
     document.getElementById("productPrice").textContent =
-      "₹" + product.price;
+      "₹" + (product.sale_price || product.price);
 
     document.getElementById("productDescription").textContent =
-      product.description;
+      product.description || "";
 
     document.getElementById("productSize").textContent =
-      product.size;
+      product.size || "";
 
     document.getElementById("productStock").textContent =
       product.stock + " available";
 
+  } catch (error) {
+
+    console.error(
+      "Failed to load product:",
+      error
+    );
+
+    document.getElementById("productName").textContent =
+      "Something went wrong.";
+
   }
+
+}
+
+loadProduct();
+
+  
 
 
   function addToCart() {
@@ -391,7 +394,7 @@
     id: productId,
     name: product.name,
     price: product.price,
-    image: product.image,
+    image: product.image_url,
     note: note,
     quantity: 1
   };
@@ -427,7 +430,7 @@ function buyNow() {
     id: productId,
     name: product.name,
     price: product.price,
-    image: product.image,
+    image: product.image_url,
     note: note,
     quantity: 1
   };
