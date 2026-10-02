@@ -1056,6 +1056,52 @@ if (product.is_new_arrival) {
 
   loadStoreProducts();
 
+  async function loadCategories() {
+
+  try {
+
+    const response =
+      await fetch("/api/admin/categories");
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      return;
+    }
+
+    const categoryGrid =
+      document.getElementById("categoryGrid");
+
+    categoryGrid.innerHTML = "";
+
+    data.categories.forEach(category => {
+
+      const card =
+        document.createElement("div");
+
+      card.className = "category";
+
+      card.innerHTML = `
+        <h3>${category.name}</h3>
+        <p>Little handmade treasures from AELORIA.</p>
+      `;
+
+      categoryGrid.appendChild(card);
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load categories:",
+      error
+    );
+
+  }
+
+}
+  loadCategories();
 </script>
 
 </body>
