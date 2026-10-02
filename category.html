@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>AELORIA — Category</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      background: #FFF8E2;
+      color: #5E442E;
+      font-family: Georgia, serif;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: #5E442E;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(94, 68, 46, 0.12);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 220px;
+      background: #FFEFB9;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-card h2 {
+      margin-top: 16px;
+    }
+
+    .price {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: #C85555;
+      color: white;
+      text-decoration: none;
+    }
+
+    #message {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main class="container">
+
+    <a
+      href="index.html"
+      class="back"
+    >
+      ← Back to AELORIA
+    </a>
+
+    <h1 id="categoryTitle">
+      Category
+    </h1>
+
+    <div id="message">
+      Loading products...
+    </div>
+
+    <div
+      class="product-grid"
+      id="categoryProductGrid"
+    >
+    </div>
+
+  </main>
+
+  <script>
+
+async function loadCategoryProducts() {
+
+  try {
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const categorySlug =
+      params.get("category");
+
+    if (!categorySlug) {
+      document.getElementById("message").textContent =
+        "Category not found.";
+      return;
+    }
+
+    const response =
+      await fetch("/api/products");
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      throw new Error("Failed to load products");
+    }
+
+    const products =
+      data.products.filter(
+        product =>
+          product.category_slug === categorySlug
+      );
+
+    const title =
+      document.getElementById("categoryTitle");
+
+    const grid =
+      document.getElementById("categoryProductGrid");
+
+    const message =
+      document.getElementById("message");
+
+    const categoryName =
+      products.length > 0
+        ? products[0].category_name
+        : categorySlug
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, letter => letter.toUpperCase());
+
+    title.textContent =
+      categoryName;
+
+    grid.innerHTML = "";
+
+    if (products.length === 0) {
+
+      message.textContent =
+        "No products in this category yet.";
+
+      return;
+    }
+
+    message.textContent = "";
+
+    products.forEach(product => {
+
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "product-card";
+
+      card.innerHTML = `
+        <div class="product-image">
+          ${
+            product.image_url
+              ? `<img
+                   src="${product.image_url}"
+                   alt="${product.name}"
+                 >`
+              : "🌷"
+          }
+        </div>
+
+        <h2>
+          ${product.name}
+        </h2>
+
+        <div class="price">
+          ₹${product.sale_price || product.price}
+        </div>
+
+        <a
+          href="product.html?product=${product.id}"
+          class="button"
+        >
+          View Product
+        </a>
+      `;
+
+      grid.appendChild(card);
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load category products:",
+      error
+    );
+
+    document.getElementById("message").textContent =
+      "Something went wrong while loading this category.";
+
+  }
+
+}
+
+loadCategoryProducts();
+
+</script>
+</body>
+
+</html>
