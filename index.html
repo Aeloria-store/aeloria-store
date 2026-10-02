@@ -1083,9 +1083,16 @@ if (product.is_new_arrival) {
       card.className = "category";
 
       card.innerHTML = `
-        <h3>${category.name}</h3>
-        <p>Little handmade treasures from AELORIA.</p>
-      `;
+  <h3>${category.name}</h3>
+  <p>Little handmade treasures from AELORIA.</p>
+`;
+
+card.style.cursor = "pointer";
+
+card.addEventListener("click", () => {
+  window.location.href =
+    `category.html?category=${encodeURIComponent(category.slug)}`;
+});
 
       categoryGrid.appendChild(card);
 
