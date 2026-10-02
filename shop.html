@@ -277,25 +277,11 @@
 
     <select id="category" onchange="filterProducts()">
 
-      <option value="all">
-        All Categories
-      </option>
+  <option value="all">
+    All Categories
+  </option>
 
-      <option value="Crochet Characters">
-        Crochet Characters
-      </option>
-
-      <option value="Clay Whimsy Frames">
-        Clay Whimsy Frames
-      </option>
-
-      <option value="Clay Vintage Frames">
-        Clay Vintage Frames
-      </option>
-
-      <option value="Combo Offers">
-        Combo Offers
-      </option>
+</select>
 
     </select>
 
@@ -535,8 +521,50 @@ function filterProducts() {
   renderProducts(filteredProducts);
 
 }
+async function loadShopCategories() {
 
+  try {
 
+    const response =
+      await fetch("/api/admin/categories");
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      throw new Error("Failed to load categories");
+    }
+
+    const categorySelect =
+      document.getElementById("category");
+
+    data.categories.forEach(category => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        category.name;
+
+      option.textContent =
+        category.name;
+
+      categorySelect.appendChild(option);
+
+    });
+
+  } catch (error) {
+
+    console.error(
+      "Failed to load shop categories:",
+      error
+    );
+
+  }
+
+}
+
+loadShopCategories();
 loadShopProducts();
 
 </script>
