@@ -298,42 +298,97 @@
 
           <div class="payment">
 
-            <strong>UPI Payment</strong>
+  <strong>UPI Payment</strong>
 
-            <p>
-              This order is 100% prepaid.
-              Please scan the AELORIA UPI QR and complete the payment.
-            </p>
+  <p>
+    This order is 100% prepaid.
+    Please complete your payment using UPI.
+  </p>
 
-            <div class="qr">
-  <img
-    src="images/IMG-20260213-WA0011.jpg""
-    alt="AELORIA UPI QR Code"
+  <div
     style="
-      width: 100%;
-      max-width: 280px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border-radius: 12px;
+      background:#FFF8E2;
+      border:1px solid #FFEFB9;
+      border-radius:16px;
+      padding:16px;
+      margin:18px 0;
+      text-align:center;
     "
   >
+
+    <p style="margin:0 0 8px;">
+      <strong>Pay to:</strong>
+      Jyoti Kailas Jadhav
+    </p>
+
+    <p style="margin:0;">
+      <strong>UPI ID:</strong>
+      9028944267@ybl
+    </p>
+
+  </div>
+
+  <button
+    type="button"
+    id="upiPayButton"
+    style="
+      width:100%;
+      padding:14px 18px;
+      border:0;
+      border-radius:14px;
+      background:#C85555;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      margin-bottom:16px;
+    "
+  >
+    Pay with UPI App ♡
+  </button>
+
+  <p style="text-align:center; margin:10px 0;">
+    — or scan the QR code —
+  </p>
+
+  <div class="qr">
+    <img
+      src="images/IMG-20260213-WA0011.jpg"
+      alt="AELORIA UPI QR Code"
+      style="
+        width:100%;
+        max-width:280px;
+        height:auto;
+        display:block;
+        margin:0 auto;
+        border-radius:12px;
+      "
+    >
+  </div>
+
+  <label for="transactionId">
+    UPI Transaction / Reference ID *
+  </label>
+
+  <input
+    id="transactionId"
+    required
+  >
+
+  <p class="warning">
+    ⚠️ Entering a transaction ID does not automatically confirm payment.
+    Your payment will be manually verified before the order is processed.
+  </p>
+
+  <label>
+    <input
+      id="paymentConfirm"
+      type="checkbox"
+      required
+    >
+    I have completed the UPI payment and entered the correct reference ID.
+  </label>
+
 </div>
-
-            <label>UPI Transaction / Reference ID *</label>
-            <input id="transactionId" required>
-
-            <p class="warning">
-              ⚠️ Entering a transaction ID does not automatically confirm payment.
-              Your payment will be manually verified before the order is processed.
-            </p>
-
-            <label>
-              <input id="paymentConfirm" type="checkbox" required>
-              I have completed the UPI payment and entered the correct reference ID.
-            </label>
-
-          </div>
 
           <button class="place-order" type="submit">
             Place Order ♡
@@ -485,8 +540,8 @@ products.forEach(item => {
       const shipping =
         75;
 
-      const total =
-        subtotal + shipping;
+      let total =
+  subtotal + shipping;
 
 
       const order = {
@@ -572,7 +627,45 @@ window.location.href =
   "order-success.html";
 
     });
+document
+  .getElementById("upiPayButton")
+  .addEventListener("click", () => {
 
+    const buyNowData =
+      localStorage.getItem("aeloriaBuyNow");
+
+    const cartData =
+      localStorage.getItem("aeloriaCheckoutCart");
+
+    const products =
+      buyNowData
+        ? [JSON.parse(buyNowData)]
+        : JSON.parse(cartData || "[]");
+if (products.length === 0) {
+  alert("Your cart is empty.");
+  return;
+}
+    let subtotal = 0;
+
+    products.forEach(item => {
+      subtotal +=
+        item.price * (item.quantity || 1);
+    });
+
+    const shipping = 75;
+
+    const total =
+      subtotal + shipping;
+
+    const upiUrl =
+      `upi://pay?pa=9028944267@ybl` +
+      `&pn=${encodeURIComponent("Jyoti Kailas Jadhav")}` +
+      `&am=${total.toFixed(2)}` +
+      `&cu=INR`;
+
+    window.location.href = upiUrl;
+
+  });
 </script>
 
 </body>
