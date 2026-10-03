@@ -1429,7 +1429,13 @@ ${customer.country || ""}
                 value="${order.tracking_number || ""}"
                 placeholder="Enter tracking number"
               >
-
+<label>Tracking Link</label>
+<input
+  id="tracking-link-${order.order_id}"
+  value="${order.tracking_link || ""}"
+  placeholder="Paste courier tracking link"
+  type="url"
+>
 
               <label>
                 Admin Notes
