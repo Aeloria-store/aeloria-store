@@ -977,7 +977,7 @@ if (product.is_new_arrival) {
         dbOrder.courier,
 
       trackingNumber:
-        dbOrder.tracking_number
+        dbOrder.tracking_number, 
 
       trackingLink:
         dbOrder.tracking_link
@@ -1042,6 +1042,9 @@ if (product.is_new_arrival) {
               </p>
             `
             : ""
+        } 
+
+        
           ${
   order.trackingLink
     ? `
