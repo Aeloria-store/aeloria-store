@@ -334,9 +334,9 @@ currentCategoryId = categoryId;
 </label>
 
 <input
-  id="productImageUrl"
-  type="url"
-  placeholder="Paste product image URL here"
+  id="productImageFile"
+  type="file"
+  accept="image/*"
 >
 <label>
   Size
@@ -1003,8 +1003,37 @@ loadProductCategories();
   const stock =
     Number(document.getElementById("productStock").value);
 
-  const imageUrl =
-    document.getElementById("productImageUrl").value.trim();
+  const imageFile =
+  document.getElementById("productImageFile").files[0];
+
+let imageUrl = "";
+
+if (imageFile) {
+  const imageFormData = new FormData();
+  imageFormData.append("file", imageFile);
+
+  const uploadResponse = await fetch(
+    "/api/admin/upload-image",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + adminPassword
+      },
+      body: imageFormData
+    }
+  );
+
+  const uploadResult = await uploadResponse.json();
+
+  if (!uploadResponse.ok || !uploadResult.success) {
+    alert(
+      uploadResult.error || "Image upload failed."
+    );
+    return;
+  }
+
+  imageUrl = uploadResult.imageUrl;
+}
 
   const size =
     document.getElementById("productSize").value.trim();
