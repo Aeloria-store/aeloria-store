@@ -1512,13 +1512,16 @@ async function saveOrder(orderId) {
       "courier-" + orderId
     ).value;
 
-
   const trackingNumber =
     document.getElementById(
       "tracking-" + orderId
     ).value;
 
-
+const trackingLink =
+  document.getElementById(
+    "tracking-link-" + orderId
+  ).value;
+  
   const adminNotes =
     document.getElementById(
       "notes-" + orderId
@@ -1556,6 +1559,8 @@ async function saveOrder(orderId) {
             courier,
 
             trackingNumber,
+
+            trackingLink,
 
             adminNotes
 
