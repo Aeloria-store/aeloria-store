@@ -1042,6 +1042,23 @@ if (product.is_new_arrival) {
               </p>
             `
             : ""
+          ${
+  order.trackingLink
+    ? `
+      <strong>Track Parcel</strong>
+      <p>
+        <a
+          href="${order.trackingLink}"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color:#C85555;font-weight:600;"
+        >
+          Track Parcel ↗
+        </a>
+      </p>
+    `
+    : ""
+}
         }
 
       </div>
