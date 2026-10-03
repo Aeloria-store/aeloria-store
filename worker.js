@@ -505,9 +505,15 @@ if (
           .bind(item.id)
           .first();
 
-      if (product.made_to_order === 1) {
-        continue;
-      }
+      if (product.stock < quantity) {
+  return Response.json(
+    {
+      success: false,
+      error: `Not enough stock for product ${item.id}`
+    },
+    { status: 400 }
+  );
+}
 
       await env.DB.prepare(`
         UPDATE products
