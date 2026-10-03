@@ -662,14 +662,13 @@ ${product.stock}
 >
 
 <label>
-  Image URL
+  Product Image
 </label>
 
 <input
-  type="text"
-  id="editProductImage"
-  value="${product.image_url || ""}"
-  placeholder="Paste image URL here"
+  type="file"
+  id="editProductImageFile"
+  accept="image/*"
   style="
     width:100%;
     padding:12px;
