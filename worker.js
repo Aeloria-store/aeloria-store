@@ -423,58 +423,158 @@ if (
       env.ADMIN_PASSWORD.length > 0
   });
 }
-    if (url.pathname === "/api/orders" && request.method === "POST") {
-      try {
-        const order = await request.json();
+    if (
+  url.pathname === "/api/orders" &&
+  request.method === "POST"
+) {
+  try {
 
+    const order =
+      await request.json();
+
+    const products =
+      order.products || [];
+
+    if (products.length === 0) {
+      return Response.json(
+        {
+          success: false,
+          error: "Order has no products"
+        },
+        { status: 400 }
+      );
+    }
+
+    for (const item of products) {
+
+      const quantity =
+        Number(item.quantity || 1);
+
+      const product =
         await env.DB.prepare(`
-          INSERT INTO orders (
-            order_id,
-            created_at,
-            customer_json,
-            products_json,
-            subtotal,
-            shipping,
-            total,
-            transaction_id,
-            payment_status,
-            order_status,
-            courier,
-            tracking_number,
-            admin_notes
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          SELECT
+            id,
+            stock,
+            made_to_order
+          FROM products
+          WHERE id = ?
+          LIMIT 1
         `)
-          .bind(
-            order.orderId,
-            order.createdAt,
-            JSON.stringify(order.customer),
-            JSON.stringify(order.products),
-            order.subtotal,
-            order.shipping,
-            order.total,
-            order.transactionId || "",
-            order.paymentStatus || "Pending Verification",
-            order.orderStatus || "Pending Payment",
-            "",
-            "",
-            ""
-          )
-          .run();
+          .bind(item.id)
+          .first();
 
-        return Response.json({
-          success: true,
-          orderId: order.orderId
-        });
-      } catch (error) {
+      if (!product) {
         return Response.json(
           {
             success: false,
-            error: error.message
+            error: `Product ${item.id} not found`
           },
-          { status: 500 }
+          { status: 400 }
+        );
+      }
+
+      if (
+        product.made_to_order !== 1 &&
+        product.stock < quantity
+      ) {
+        return Response.json(
+          {
+            success: false,
+            error: `Not enough stock for product ${item.id}`
+          },
+          { status: 400 }
         );
       }
     }
+
+    for (const item of products) {
+
+      const quantity =
+        Number(item.quantity || 1);
+
+      const product =
+        await env.DB.prepare(`
+          SELECT
+            id,
+            stock,
+            made_to_order
+          FROM products
+          WHERE id = ?
+          LIMIT 1
+        `)
+          .bind(item.id)
+          .first();
+
+      if (product.made_to_order === 1) {
+        continue;
+      }
+
+      await env.DB.prepare(`
+        UPDATE products
+        SET
+          stock = stock - ?,
+          updated_at = ?
+        WHERE id = ?
+      `)
+        .bind(
+          quantity,
+          new Date().toISOString(),
+          item.id
+        )
+        .run();
+    }
+
+    await env.DB.prepare(`
+      INSERT INTO orders (
+        order_id,
+        created_at,
+        customer_json,
+        products_json,
+        subtotal,
+        shipping,
+        total,
+        transaction_id,
+        payment_status,
+        order_status,
+        courier,
+        tracking_number,
+        admin_notes
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `)
+      .bind(
+        order.orderId,
+        order.createdAt,
+        JSON.stringify(order.customer),
+        JSON.stringify(order.products),
+        order.subtotal,
+        order.shipping,
+        order.total,
+        order.transactionId || "",
+        order.paymentStatus || "Pending Verification",
+        order.orderStatus || "Pending Payment",
+        "",
+        "",
+        ""
+      )
+      .run();
+
+    return Response.json({
+      success: true,
+      orderId: order.orderId
+    });
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+
+  }
+}
 if (
   url.pathname === "/api/admin/orders" &&
   request.method === "GET"
