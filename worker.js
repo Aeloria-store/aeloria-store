@@ -650,16 +650,18 @@ if (
         order_status = ?,
         courier = ?,
         tracking_number = ?,
+        tracking_link = ?,
         admin_notes = ?
       WHERE order_id = ?
     `)
       .bind(
         body.paymentStatus || "Pending Verification",
-        body.orderStatus || "Pending Payment",
-        body.courier || "",
-        body.trackingNumber || "",
-        body.adminNotes || "",
-        body.orderId
+body.orderStatus || "Pending Payment",
+body.courier || "",
+body.trackingNumber || "",
+body.trackingLink || "",
+body.adminNotes || "",
+body.orderId
       )
       .run();
 
