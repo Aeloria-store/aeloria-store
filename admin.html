@@ -669,6 +669,7 @@ ${product.stock}
   type="file"
   id="editProductImageFile"
   accept="image/*"
+  data-current-image="${product.image_url || ""}"
   style="
     width:100%;
     padding:12px;
@@ -972,22 +973,7 @@ ${product.stock}
 
 }
 
-    alert(
-  "Product updated successfully!"
-);
-
-loadProductCategories();
-
-  } catch (error) {
-
-    alert(
-      "Could not save product: " +
-      error.message
-    );
-
-  }
-
-}
+    
   async function deleteProduct(productId) {
 
   const confirmed =
