@@ -710,6 +710,7 @@ body.orderId
         order_status,
         courier,
         tracking_number,
+        tracking_link,
         admin_notes
       FROM orders
       WHERE order_id = ?
