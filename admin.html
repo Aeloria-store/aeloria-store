@@ -1299,7 +1299,12 @@ async function loadOrders() {
               <strong>Total:</strong>
               ₹${order.total}
             </p>
-
+            
+<p><strong>Address:</strong><br>
+${customer.apartment || ""}, ${customer.street || ""}<br>
+${customer.city || ""}, ${customer.state || ""} - ${customer.pincode || ""}<br>
+${customer.country || ""}
+</p>
 
             <div class="product">
 
