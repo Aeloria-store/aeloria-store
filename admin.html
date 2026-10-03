@@ -778,6 +778,63 @@ ${product.stock}
 
   try {
 
+    const imageFile =
+      document
+        .getElementById("editProductImageFile")
+        .files[0];
+
+    let imageUrl = "";
+
+    if (imageFile) {
+
+      const imageFormData = new FormData();
+
+      imageFormData.append(
+        "file",
+        imageFile
+      );
+
+      const uploadResponse =
+        await fetch(
+          "/api/admin/upload-image",
+          {
+            method: "POST",
+
+            headers: {
+              "Authorization":
+                "Bearer " + adminPassword
+            },
+
+            body: imageFormData
+          }
+        );
+
+      const uploadResult =
+        await uploadResponse.json();
+
+      if (
+        !uploadResponse.ok ||
+        !uploadResult.success
+      ) {
+        alert(
+          uploadResult.error ||
+          "Image upload failed."
+        );
+        return;
+      }
+
+      imageUrl =
+        uploadResult.imageUrl;
+
+    } else {
+
+      imageUrl =
+        document
+          .getElementById("editProductImageFile")
+          .dataset.currentImage || "";
+
+    }
+
     const product = {
 
       id: productId,
@@ -819,11 +876,7 @@ ${product.stock}
             .value
         ),
 
-      imageUrl:
-        document
-          .getElementById("editProductImage")
-          .value
-          .trim(),
+      imageUrl: imageUrl,
 
       size:
         document
@@ -901,6 +954,23 @@ ${product.stock}
         "Could not update product"
       );
     }
+
+    alert(
+      "Product updated successfully!"
+    );
+
+    loadProductCategories();
+
+  } catch (error) {
+
+    alert(
+      "Could not save product: " +
+      error.message
+    );
+
+  }
+
+}
 
     alert(
   "Product updated successfully!"
