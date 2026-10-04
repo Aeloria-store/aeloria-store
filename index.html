@@ -91,7 +91,35 @@
       margin-bottom: 28px;
     }
 
+.announcement-bar {
+  width: 100%;
+  overflow: hidden;
+  background: var(--butter);
+  color: var(--walnut);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 101;
+}
 
+.announcement-text {
+  display: inline-block;
+  padding: 8px 0;
+  padding-left: 100%;
+  animation: announcement-scroll 14s linear infinite;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+@keyframes announcement-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
     /* =========================
        HEADER
     ========================== */
@@ -455,7 +483,11 @@
   <!-- =========================
        HEADER
   ========================== -->
-
+<div class="announcement-bar">
+  <div class="announcement-text">
+    ✨ FREE SHIPPING ON ORDERS ₹699 & ABOVE ✨
+  </div>
+</div>
   <header>
 
     <a href="#" class="brand-name">AELORIA</a>
