@@ -1067,37 +1067,8 @@ ${product.stock}
   const stock =
     Number(document.getElementById("productStock").value);
 
-  const imageFile =
-  document.getElementById("productImageFile").files[0];
-
-let imageUrl = "";
-
-if (imageFile) {
-  const imageFormData = new FormData();
-  imageFormData.append("file", imageFile);
-
-  const uploadResponse = await fetch(
-    "/api/admin/upload-image",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + adminPassword
-      },
-      body: imageFormData
-    }
-  );
-
-  const uploadResult = await uploadResponse.json();
-
-  if (!uploadResponse.ok || !uploadResult.success) {
-    alert(
-      uploadResult.error || "Image upload failed."
-    );
-    return;
-  }
-
-  imageUrl = uploadResult.imageUrl;
-}
+  const imageUrl =
+  document.getElementById("productImageUrl").value.trim();
 
   const size =
     document.getElementById("productSize").value.trim();
