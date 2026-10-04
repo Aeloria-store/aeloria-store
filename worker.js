@@ -32,7 +32,7 @@ ORDER BY products.id ASC
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not load products"
       },
       { status: 500 }
     );
@@ -107,7 +107,7 @@ ORDER BY products.id ASC
         return Response.json(
           {
             success: false,
-            error: error.message
+            error: "Could not create category"
           },
           { status: 500 }
         );
@@ -165,7 +165,7 @@ ORDER BY products.id ASC
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not delete product"
       },
       { status: 500 }
     );
@@ -245,7 +245,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not update product"
       },
       { status: 500 }
     );
@@ -320,7 +320,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not load categories"
       },
       { status: 500 }
     );
@@ -402,7 +402,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not create product"
       },
       { status: 500 }
     );
@@ -450,7 +450,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not load products"
       },
       { status: 500 }
     );
@@ -609,7 +609,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not create order"
       },
       { status: 500 }
     );
@@ -650,7 +650,7 @@ if (
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not load orders"
       },
       { status: 500 }
     );
@@ -709,7 +709,7 @@ body.orderId
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not update order"
       },
       { status: 500 }
     );
