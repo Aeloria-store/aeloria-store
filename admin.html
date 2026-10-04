@@ -675,10 +675,10 @@ ${product.stock}
 </label>
 
 <input
-  type="file"
-  id="editProductImageFile"
-  accept="image/*"
-  data-current-image="${product.image_url || ""}"
+  type="url"
+  id="editProductImageUrl"
+  value="${product.image_url || ""}"
+  placeholder="Paste product image URL here"
   style="
     width:100%;
     padding:12px;
@@ -788,62 +788,8 @@ ${product.stock}
 
   try {
 
-    const imageFile =
-      document
-        .getElementById("editProductImageFile")
-        .files[0];
-
-    let imageUrl = "";
-
-    if (imageFile) {
-
-      const imageFormData = new FormData();
-
-      imageFormData.append(
-        "file",
-        imageFile
-      );
-
-      const uploadResponse =
-        await fetch(
-          "/api/admin/upload-image",
-          {
-            method: "POST",
-
-            headers: {
-              "Authorization":
-                "Bearer " + adminPassword
-            },
-
-            body: imageFormData
-          }
-        );
-
-      const uploadResult =
-        await uploadResponse.json();
-
-      if (
-        !uploadResponse.ok ||
-        !uploadResult.success
-      ) {
-        alert(
-          uploadResult.error ||
-          "Image upload failed."
-        );
-        return;
-      }
-
-      imageUrl =
-        uploadResult.imageUrl;
-
-    } else {
-
-      imageUrl =
-        document
-          .getElementById("editProductImageFile")
-          .dataset.currentImage || "";
-
-    }
+    const imageUrl =
+  document.getElementById("editProductImageUrl").value.trim();
 
     const product = {
 
