@@ -772,6 +772,7 @@ body.orderId
       { status: 500 }
     );
   }
+ } 
   
     return env.ASSETS.fetch(request);
   }
