@@ -715,17 +715,12 @@ body.orderId
       SELECT
         order_id,
         created_at,
-        customer_json,
-        products_json,
-        subtotal,
-        shipping,
         total,
         payment_status,
         order_status,
         courier,
         tracking_number,
-        tracking_link,
-        admin_notes
+        tracking_link
       FROM orders
       WHERE order_id = ?
       LIMIT 1
@@ -752,7 +747,7 @@ body.orderId
     return Response.json(
       {
         success: false,
-        error: error.message
+        error: "Could not check order"
       },
       { status: 500 }
     );
