@@ -252,6 +252,35 @@ if (
 
   }
 }
+    if (
+  url.pathname === "/api/categories" &&
+  request.method === "GET"
+) {
+  try {
+    const result = await env.DB.prepare(`
+      SELECT
+        id,
+        name,
+        slug
+      FROM categories
+      ORDER BY id ASC
+    `).all();
+
+    return Response.json({
+      success: true,
+      categories: result.results
+    });
+
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: "Could not load categories"
+      },
+      { status: 500 }
+    );
+  }
+}
 if (
   url.pathname === "/api/admin/categories" &&
   request.method === "GET"
