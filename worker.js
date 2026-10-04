@@ -428,15 +428,7 @@ if (
 
   }
 }  
-if (
-  url.pathname === "/api/admin/test-secret"
-) {
-  return Response.json({
-    secretConfigured:
-      typeof env.ADMIN_PASSWORD === "string" &&
-      env.ADMIN_PASSWORD.length > 0
-  });
-}
+
     if (
   url.pathname === "/api/orders" &&
   request.method === "POST"
