@@ -763,7 +763,6 @@ body.orderId
       success: true,
       order: result
     });
-
   } catch (error) {
     return Response.json(
       {
@@ -773,96 +772,7 @@ body.orderId
       { status: 500 }
     );
   }
-}
-    // POST /api/admin/upload-image
-if (request.method === "POST" && url.pathname === "/api/admin/upload-image") {
-  const auth = request.headers.get("Authorization");
-
-  if (auth !== `Bearer ${env.ADMIN_PASSWORD}`) {
-    return Response.json(
-      { success: false, error: "Unauthorized" },
-      { status: 401 }
-    );
-  }
-
-  try {
-    const formData = await request.formData();
-    const file = formData.get("file");
-
-    if (!file || typeof file === "string") {
-      return Response.json(
-        { success: false, error: "No image file provided" },
-        { status: 400 }
-      );
-    }
-
-    if (!file.type.startsWith("image/")) {
-      return Response.json(
-        { success: false, error: "Only image files are allowed" },
-        { status: 400 }
-      );
-    }
-
-    if (file.size > 10 * 1024 * 1024) {
-      return Response.json(
-        { success: false, error: "Image must be 10 MB or smaller" },
-        { status: 400 }
-      );
-    }
-
-    const timestamp = Math.floor(Date.now() / 1000);
-
-    const signatureBase = `timestamp=${timestamp}${env.CLOUDINARY_API_SECRET}`;
-
-    const hashBuffer = await crypto.subtle.digest(
-      "SHA-1",
-      new TextEncoder().encode(signatureBase)
-    );
-
-    const signature = [...new Uint8Array(hashBuffer)]
-      .map(b => b.toString(16).padStart(2, "0"))
-      .join("");
-
-    const uploadData = new FormData();
-    uploadData.append("file", file);
-    uploadData.append("api_key", env.CLOUDINARY_API_KEY);
-    uploadData.append("timestamp", timestamp.toString());
-    uploadData.append("signature", signature);
-
-    const cloudinaryResponse = await fetch(
-      `https://api.cloudinary.com/v1_1/${env.CLOUDINARY_CLOUD_NAME}/image/upload`,
-      {
-        method: "POST",
-        body: uploadData
-      }
-    );
-
-    const result = await cloudinaryResponse.json();
-
-    if (!cloudinaryResponse.ok) {
-      return Response.json(
-        {
-          success: false,
-          error: result.error?.message || "Cloudinary upload failed"
-        },
-        { status: 500 }
-      );
-    }
-
-    return Response.json({
-      success: true,
-      imageUrl: result.secure_url
-    });
-  } catch (error) {
-    return Response.json(
-      {
-        success: false,
-        error: error.message
-      },
-      { status: 500 }
-    );
-  }
-}
+  
     return env.ASSETS.fetch(request);
   }
 };
