@@ -256,6 +256,20 @@ if (
   url.pathname === "/api/admin/categories" &&
   request.method === "GET"
 ) {
+  const auth =
+  request.headers.get("Authorization");
+
+if (
+  auth !== `Bearer ${env.ADMIN_PASSWORD}`
+) {
+  return Response.json(
+    {
+      success: false,
+      error: "Unauthorized"
+    },
+    { status: 401 }
+  );
+}
   try {
     const result = await env.DB.prepare(`
       SELECT
