@@ -712,6 +712,188 @@ nav a:hover {
 nav a:hover::after {
   width: 70%;
 }
+    /* =========================================
+   AELORIA | CUSTOM COMMISSION PLAQUE
+   ========================================= */
+
+.custom-commission {
+  padding: 90px 20px;
+  background: var(--cream);
+}
+
+.custom-card {
+  position: relative;
+  max-width: 760px;
+  margin: auto;
+  padding: 85px 45px 65px;
+  text-align: center;
+
+  background: var(--vanilla);
+
+  border: 1px solid rgba(73, 100, 81, 0.18);
+
+  box-shadow:
+    0 18px 35px rgba(73, 100, 81, 0.10),
+    0 4px 10px rgba(78, 81, 75, 0.08);
+
+  overflow: visible;
+
+  /* ornamental scalloped outer edge */
+  border-radius: 28px;
+}
+
+.custom-card::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+
+  border: 1px solid rgba(113, 137, 109, 0.35);
+
+  pointer-events: none;
+}
+
+.custom-card::after {
+  content: "❀  ❧  ❀  ❧  ❀";
+
+  position: absolute;
+  left: 50%;
+  top: 27px;
+
+  transform: translateX(-50%);
+
+  width: 90%;
+
+  color: var(--bistre);
+  font-size: 24px;
+  letter-spacing: 9px;
+
+  white-space: nowrap;
+}
+
+
+/* TOP PIN / CLIP */
+
+.custom-pin {
+  position: absolute;
+  top: -19px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 46px;
+  height: 46px;
+
+  background: var(--yellow);
+
+  border-radius: 50%;
+
+  border: 3px solid var(--walnut);
+
+  box-shadow:
+    0 5px 8px rgba(78, 81, 75, 0.20),
+    inset 0 2px 3px rgba(255, 255, 255, 0.7);
+
+  z-index: 3;
+}
+
+
+/* LAVENDER PAPER PLAQUE */
+
+.custom-inner {
+  position: relative;
+
+  max-width: 610px;
+  margin: auto;
+
+  padding: 48px 38px 42px;
+
+  background: var(--melon);
+
+  border: 1px solid rgba(73, 100, 81, 0.16);
+
+  border-radius: 45% 45% 45% 45% / 12% 12% 12% 12%;
+
+  box-shadow:
+    inset 0 0 0 8px rgba(255, 255, 255, 0.20),
+    0 6px 16px rgba(78, 81, 75, 0.08);
+}
+
+
+/* BOTANICAL CORNERS */
+
+.custom-inner::before,
+.custom-inner::after {
+  position: absolute;
+
+  color: var(--bistre);
+  font-size: 30px;
+
+  line-height: 1;
+}
+
+.custom-inner::before {
+  content: "❧";
+
+  left: 18px;
+  top: 16px;
+
+  transform: rotate(-20deg);
+}
+
+.custom-inner::after {
+  content: "❧";
+
+  right: 18px;
+  bottom: 16px;
+
+  transform: rotate(160deg);
+}
+
+
+/* PLAQUE TITLE */
+
+.custom-inner h2 {
+  margin: 5px 0 20px;
+
+  color: var(--walnut);
+
+  font-family: "Great Vibes", cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+
+/* PLAQUE TEXT */
+
+.custom-inner p {
+  max-width: 500px;
+  margin: 10px auto;
+
+  color: var(--walnut);
+
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+
+/* DIVIDER */
+
+.custom-divider {
+  margin: 12px auto 18px;
+
+  color: var(--bistre);
+
+  font-size: 20px;
+  letter-spacing: 8px;
+}
+
+
+/* CONTACT LINE */
+
+.custom-inner .custom-contact {
+  margin-top: 25px;
+  font-style: italic;
+}
   </style>
 </head>
 
