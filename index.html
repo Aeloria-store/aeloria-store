@@ -663,7 +663,58 @@
       }
 
     }
+/* ================================
+   AELORIA | HEADER REFINEMENT
+   ================================ */
 
+header {
+  background: rgba(255, 255, 255, 0.94);
+  padding: 24px 15px 16px;
+  border-bottom: 1px solid rgba(73, 100, 81, 0.12);
+  box-shadow: 0 4px 18px rgba(73, 100, 81, 0.04);
+}
+
+header .brand-name {
+  color: var(--botanical);
+  letter-spacing: 4px;
+}
+
+.tagline {
+  color: #7B8178;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+nav {
+  margin-top: 17px;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--ink);
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 1px;
+  background: var(--pomegranate);
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+
+nav a:hover {
+  color: var(--botanical);
+}
+
+nav a:hover::after {
+  width: 70%;
+}
   </style>
 </head>
 
