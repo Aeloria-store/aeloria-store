@@ -782,7 +782,52 @@ nav a:hover::after {
 
 
 
-  
+  /* ================================
+   AELORIA — COMPACT HEADER
+   ================================ */
+
+header {
+  padding: 10px 15px 8px !important;
+}
+
+header .brand-name {
+  font-size: clamp(2.4rem, 7vw, 4rem) !important;
+  letter-spacing: 3px;
+  line-height: 0.9;
+}
+
+.tagline {
+  margin-top: 2px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.2;
+}
+
+nav {
+  margin-top: 7px !important;
+  gap: 12px 16px !important;
+  font-size: 0.82rem !important;
+  line-height: 1.2;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 10px 10px 7px !important;
+  }
+
+  header .brand-name {
+    font-size: 2.7rem !important;
+  }
+
+  .tagline {
+    font-size: 0.72rem !important;
+  }
+
+  nav {
+    margin-top: 6px !important;
+    gap: 8px 12px !important;
+    font-size: 0.76rem !important;
+  }
+}
 
 
   </style>
