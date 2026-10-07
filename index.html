@@ -265,10 +265,19 @@ padding: 60px 20px;
     }
 
     .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.product-card {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+}
 
     .product-card {
       background: var(--vanilla);
