@@ -260,100 +260,64 @@ padding: 60px 20px;
    PRODUCT SECTION
 ========================= */
 
+.products {
+padding: 70px 0;
+background: var(--white);
+}
+
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  width: 100%;
+
+display: flex;
+flex-direction: row;
+gap: 24px;
+overflow-x: auto;
+overflow-y: hidden;
+scroll-snap-type: x mandatory;
+padding-bottom: 10px;
 }
 
 .product-card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-
-  background: var(--vanilla);
-  border-radius: 22px;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  box-shadow: 0 8px 25px rgba(94, 68, 46, 0.08);
-  transition: transform 0.3s ease;
+flex: 0 0 48%;
+scroll-snap-align: center;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-}
+.product-card {  
+  background: var(--vanilla);  
+  border-radius: 20px;  
+  padding: 14px;  
+  box-shadow: 0 8px 25px rgba(94, 68, 46, 0.08);  
+  transition: transform 0.3s ease;  
+}  
 
+.product-card:hover {  
+  transform: translateY(-5px);  
+}  
 
-/* =========================
-   PRODUCT IMAGE
-========================= */
+.product-image {  
+  height: 250px;  
+  border-radius: 16px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 4rem;  
+  background: var(--butter);  
+}  
 
-.product-image {
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.product-card h3 {  
+  font-family: "Schoolbell", serif;  
+  font-size: 1.05rem;  
+  margin: 15px 4px 4px;  
+}  
 
-  width: calc(100% - 20px);
-  height: 58%;
+.price {  
+  margin-left: 4px;  
+  color: var(--pomegranate);  
+  font-weight: 600;  
+}  
 
-  border-radius: 16px;
-  overflow: hidden;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 4rem;
-  background: var(--butter);
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-
-/* =========================
-   PRODUCT NAME
-========================= */
-
-.product-card h3 {
-  position: absolute;
-
-  left: 14px;
-  right: 75px;
-  bottom: 58px;
-
-  margin: 0;
-
-  font-family: "Schoolbell", serif;
-  font-size: 1.05rem;
-  line-height: 1.2;
-
-  max-width: none;
-}
-
-
-/* =========================
-   PRICE
-========================= */
-
-.price {
-  position: absolute;
-
-  right: 14px;
-  bottom: 58px;
-
-  margin: 0;
-
-  color: var(--pomegranate);
-  font-weight: 600;
-  font-size: 1rem;
+.product-card .button {  
+  margin: 14px 4px 4px;  
+  font-size: 0.85rem;  
 }
 
 
